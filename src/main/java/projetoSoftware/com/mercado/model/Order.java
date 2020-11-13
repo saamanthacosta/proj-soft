@@ -1,4 +1,4 @@
-package pprado.com.jpaexample.model;
+package projetoSoftware.com.mercado.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,13 +29,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer orderId, Integer customerId, Date orderDate, Integer status, String comments, Date shippedDate, Integer shipperId) {
+    public Order(Integer orderId, Integer customerId, Integer status, String comments, Integer shipperId) {
         this.orderId = orderId;
         this.customerId = customerId;
-        this.orderDate = orderDate;
+        this.orderDate = new Date();
         this.status = status;
         this.comments = comments;
-        this.shippedDate = shippedDate;
+        this.shippedDate = new Date();
         this.shipperId = shipperId;
     }
 

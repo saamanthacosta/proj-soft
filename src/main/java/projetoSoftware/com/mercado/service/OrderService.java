@@ -1,11 +1,11 @@
-package pprado.com.jpaexample.service;
+package projetoSoftware.com.mercado.service;
 
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pprado.com.jpaexample.model.Order;
-import pprado.com.jpaexample.repository.OrderRepository;
+import projetoSoftware.com.mercado.model.Order;
+import projetoSoftware.com.mercado.repository.OrderRepository;
 
 import java.util.List;
 
@@ -41,11 +41,11 @@ public class OrderService {
 
 
 
-//
-//    public void createOrder(Order order){
-//        orderRepository.createOrder(CREATE_ORDER_QUERY, order);
-//    }
-//
+
+    public void createOrder(Order order){
+        orderRepository.save(order);
+    }
+
 //    public void updateOrder(int order_id, Order updatedOrder){
 //        orderRepository.updateOrder(UPDATE_ORDER_QUERY, updatedOrder, order_id);
 //    }

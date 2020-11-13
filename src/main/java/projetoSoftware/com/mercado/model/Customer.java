@@ -1,4 +1,4 @@
-package pprado.com.jpaexample.model;
+package projetoSoftware.com.mercado.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

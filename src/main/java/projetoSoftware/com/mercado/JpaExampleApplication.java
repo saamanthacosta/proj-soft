@@ -1,4 +1,4 @@
-package pprado.com.jpaexample;
+package projetoSoftware.com.mercado;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package pprado.com.jpaexample;
+package projetoSoftware.com.mercado;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

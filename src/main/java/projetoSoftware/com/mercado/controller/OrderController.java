@@ -1,11 +1,12 @@
-package pprado.com.jpaexample.controller;
+package projetoSoftware.com.mercado.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pprado.com.jpaexample.model.Order;
-import pprado.com.jpaexample.service.OrderService;
+import projetoSoftware.com.mercado.model.Order;
+import projetoSoftware.com.mercado.service.OrderService;
+
 import java.util.List;
 
 
@@ -49,13 +50,13 @@ import java.util.List;
             return new ResponseEntity<>(order, HttpStatus.OK);
         }
 //
-//        @PostMapping(path = "/create")
-//        public ResponseEntity<?> createOrder(
-//                @RequestBody Order newOrder
-//        ){
-//            orderService.createOrder(newOrder);
-//            return new ResponseEntity<>("{\"Message\": \"Created.\"}", HttpStatus.CREATED);
-//        }
+        @PostMapping(path = "/create")
+        public ResponseEntity<?> createOrder(
+                @RequestBody Order newOrder
+        ){
+            orderService.createOrder(newOrder);
+            return new ResponseEntity<>("{\"Message\": \"Created.\"}", HttpStatus.CREATED);
+        }
 //
 //        @PostMapping(path = "/update/{order_id}")
 //        public ResponseEntity<?> updateOrderById(

@@ -1,7 +1,8 @@
-package pprado.com.jpaexample.repository;
+package projetoSoftware.com.mercado.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pprado.com.jpaexample.model.Order;
+import projetoSoftware.com.mercado.model.Order;
+
 import java.util.List;
 
 
@@ -13,7 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findByStatus(Integer status);
 
-
+    Order save(Order order);
 
 //    public void createOrder(String CREATE_ORDER_QUERY, Order order){
 //
