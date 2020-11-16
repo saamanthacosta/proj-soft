@@ -43,8 +43,8 @@ public class ClienteController {
         }
     }
     @PostMapping("/cliente/reclamacao")
-    public void reclamacaoCliente(@RequestBody String reclamacao, @RequestHeader int documento){
+    public void reclamacaoCliente(@RequestBody String reclamacao, @RequestHeader String cpf){
         System.out.println("ClienteControlador :: reclamacaoCliente :: Entrou cliente" );
-//        clienteServico.registraReclamacao(documento, reclamacao);
+        clienteServico.registraReclamacao(cpf, reclamacao);
     }
 }

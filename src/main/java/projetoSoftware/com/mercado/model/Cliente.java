@@ -36,8 +36,6 @@ public class Cliente {
     @Column(name="dataCadastro")
     private Date dataCadastro;
 
-    @Autowired
-    ReclamacaoRepository reclamacaoRepository;
 
     public Cliente(String cpf, String identidade, String email, boolean prefencial, int pontosAcumlados){
         this.cpf = cpf;
@@ -49,10 +47,6 @@ public class Cliente {
     }
     public void setDataCadastro(Date data){
         this.dataCadastro = data;
-    }
-    public void realizarReclamacao(String reclamacao){
-        Reclamacao novo = new Reclamacao(this, reclamacao);
-        reclamacaoRepository.save(novo);
     }
     public boolean adicionarPontos(int pontos){
         if(this.getPontosAcumulados()>=pontos){
