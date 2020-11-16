@@ -1,16 +1,20 @@
 package projetoSoftware.com.mercado.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.Date;
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "orders")
 public class Order {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="order_id")
     private Integer orderId;
     @Column(name = "customer_id")
@@ -26,7 +30,7 @@ public class Order {
     @Column(name = "shipper_id")
     private Integer shipperId;
 
-    public Order() {
+    /*public Order() {
     }
 
     public Order(Integer orderId, Integer customerId, Integer status, String comments, Integer shipperId) {
@@ -93,5 +97,5 @@ public class Order {
 
     public void setShipperId(Integer shipperId) {
         this.shipperId = shipperId;
-    }
+    }*/
 }
