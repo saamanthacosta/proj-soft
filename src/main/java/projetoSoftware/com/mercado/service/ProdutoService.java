@@ -17,12 +17,14 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Produto getProdutoById(int identificador) {
-        return produtoRepository.findById(identificador).get();
+    public Produto getProdutoById(int codigoDeBarras) {
+        return produtoRepository.findBycodigoDeBarras(codigoDeBarras);
     }
 
     public void createProduto(Produto produto){
         produtoRepository.save(produto);
     }
+
+    public void deleteProduto(Produto produto){ produtoRepository.delete(produto);}
 
 }

@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -15,8 +12,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Produto {
-    @Id
+
     @Column(name = "identificador")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer identificador;
     @Column(name = "nome")
     private String nome;
@@ -29,18 +28,14 @@ public class Produto {
     @Column(name = "quantidade")
     private Integer quantidade;
 
- /*   @Override
-    public String toString() {
-        return "Produto{id=" + identificador +
-                ", nome='" + nome + '\'' +
-                ", preco='" + preco + '\'' +
-                ", codigo_barras='" + codigoDeBarras + '\'' +
-                ", fornecedor='" + fornecedor + '\'' +
-                ", quantidade='" + quantidade + '}';
-    }
-
     boolean verificarDisponibilidade(int quantidade) {
         if (quantidade > 0) return true;
         return false;
-    }*/
+    }
+
+    public void atualizaProduto(Produto produto) {
+        this.setNome(produto.getNome());
+        this.setPreco(produto.getPreco());
+    }
+
 }
