@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import java.util.Date;
 
 @Data
 @Builder
@@ -18,14 +16,14 @@ import java.util.Date;
 public abstract class Usuario {
 
     @Id
-    @Column(name ="identificador")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "identificador")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String identificador;
-    @Column(name ="login")
+    @Column(name = "login")
     private String login;
-    @Column(name ="senha")
+    @Column(name = "senha")
     private String senha;
-    @Column(name ="nome")
+    @Column(name = "nome")
     private String nome;
 
     public Usuario(String login, String senha, String nome, String identificador) {
@@ -36,7 +34,7 @@ public abstract class Usuario {
 
     }
 
-    public String getLogin(){
+    public String getLogin() {
         return this.login;
     }
 

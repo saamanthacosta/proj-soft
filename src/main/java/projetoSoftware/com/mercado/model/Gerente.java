@@ -6,5 +6,4 @@ import projetoSoftware.com.mercado.model.Usuario;
 public class Gerente extends Usuario {
 
 
-
 }

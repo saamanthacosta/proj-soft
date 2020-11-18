@@ -5,5 +5,6 @@ import projetoSoftware.com.mercado.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, String> {
     Cliente save(Cliente cliente);
+
     Cliente findByCpf(String cpf);
 }
