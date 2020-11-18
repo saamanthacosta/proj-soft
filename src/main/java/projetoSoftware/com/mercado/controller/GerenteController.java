@@ -3,6 +3,7 @@ package projetoSoftware.com.mercado.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projetoSoftware.com.mercado.model.Produto;
 
 import javax.validation.constraints.Null;
 

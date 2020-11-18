@@ -19,7 +19,7 @@ public class VendedorController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Vendedor vendedor) {
-        System.out.println("VendedorController :: login :: Tentando autenticar vendedor " + vendedor.getLogin());
+        System.out.println("VendedorController :: login :: Tentando autenticar vendedor ");
         boolean auth = vendedorServico.autentica(vendedor);
         if (auth)
             return new ResponseEntity<Vendedor>(vendedor, HttpStatus.ACCEPTED);
