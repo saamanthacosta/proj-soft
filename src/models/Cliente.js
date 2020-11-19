@@ -1,0 +1,2 @@
+var nome;
+var cpf;
