@@ -5,12 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projetoSoftware.com.mercado.model.Produto;
 
-import javax.validation.constraints.Null;
-
 @RequestMapping("/gerente")
 @RestController
 public class GerenteController {
-
 
     @PostMapping("/iniciaSis")
     public ResponseEntity<?> iniciarSistema() {
@@ -22,7 +19,7 @@ public class GerenteController {
     @GetMapping("/alteraProduto")
     public ResponseEntity<?> alteraProduto(@RequestBody Produto produto) {
         System.out.println("GerenteController :: alteraProduto :: tentando alterar produto ");
-        return new ResponseEntity<Null>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<String>("Altera produto", HttpStatus.NO_CONTENT);
 
     }
 

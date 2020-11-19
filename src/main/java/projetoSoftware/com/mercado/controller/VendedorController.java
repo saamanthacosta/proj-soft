@@ -15,7 +15,7 @@ import projetoSoftware.com.mercado.service.VendedorServico;
 public class VendedorController {
 
     @Autowired
-    VendedorServico vendedorServico;
+    VendedorServico vendedorServico; //= new VendedorServico();
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Vendedor vendedor) {
