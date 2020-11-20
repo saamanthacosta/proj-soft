@@ -25,8 +25,6 @@ public class Cliente {
     @Column(name="dataCadastro")
     private Date dataCadastro;
 
-    @OneToOne(mappedBy = "venda")
-    private Venda venda;
 
     public Cliente(String cpf, String identidade, String email, boolean prefencial, int pontosAcumlados){
         this.cpf = cpf;

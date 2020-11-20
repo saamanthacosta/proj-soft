@@ -7,11 +7,20 @@ import projetoSoftware.com.mercado.repository.ReclamacaoRepository;
 @Service
 public class ReclamacaoServico {
     @Autowired
-    ReclamacaoRepository reclamacaoRepository;
+    ReclamacaoRepository reclamacaoRepository ;
 
     public void realizarReclamacao(String cpf, String reclamacao){
         Reclamacao novo = new Reclamacao(cpf, reclamacao);
-        reclamacaoRepository.save(novo);
+        this.save(novo);
     }
-
+    public Reclamacao save(Reclamacao reclamacao){
+        try{
+            Reclamacao reclamacaoSalva = reclamacaoRepository.save(reclamacao);
+            System.out.println("Reclamacao :: save :: reclamação salva");
+            return reclamacaoSalva;
+        }catch(Exception err){
+            System.out.println("Reclamacao :: save :: Erro ao salvar reclamação :" + err.toString());
+            return null;
+        }
+    }
 }

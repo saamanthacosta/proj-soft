@@ -9,11 +9,15 @@ import projetoSoftware.com.mercado.repository.ReclamacaoRepository;
 import javax.persistence.*;
 import java.util.Date;
 @Data
+@Table(name = "reclamacao")
+@AllArgsConstructor
+@Entity
+@NoArgsConstructor
 public class Reclamacao {
     @Id
     @Column(name ="id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    Integer id;
     @Column(name="cliente_id")
     String cliente_id;
     @Column(name="reclamacao")
@@ -21,22 +25,11 @@ public class Reclamacao {
     @Column(name="data")
     Date data;
 
-    @Autowired
-    ReclamacaoRepository reclamacaoRepository;
 
     public Reclamacao (String cliente_id, String reclamacao){
         this.cliente_id = cliente_id;
         this.reclamacao = reclamacao;
         this.data = new Date();
     }
-    public Reclamacao save(){
-        try{
-            Reclamacao reclamacao = reclamacaoRepository.save(this);
-            System.out.println("Reclamacao :: save :: reclamação salva");
-            return reclamacao;
-        }catch(Exception err){
-            System.out.println("Reclamacao :: save :: Erro ao salvar reclamação :" + err.toString());
-            return null;
-        }
-    }
+
 }

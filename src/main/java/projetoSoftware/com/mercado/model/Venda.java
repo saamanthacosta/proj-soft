@@ -21,18 +21,13 @@ public class Venda {
     private Integer identificador;
 
     @Column(name="vendedor_id")
-    private Vendedor vendedor;
+    private String vendedor;
 
     @Column(name = "cliente_id")
-    @OneToOne(optional = false)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cpf")
-    private Cliente cliente;
-
-    @Column(name = "produtos")
-    private ArrayList<Produto> produtos;
+    private String cliente;
 
     @Column(name= "formaPagamento")
-    private FormaPagamento formaPagamento;
+    private String formaPagamento;
 
     @Column(name = "totalAPagar")
     private int totalAPagar;
@@ -40,7 +35,7 @@ public class Venda {
     @Column(name = "data")
     private Date data;
 
-    @Column(name = "data")
+    @Column(name = "status")
     private Enum<statusVenda> status;
 
 

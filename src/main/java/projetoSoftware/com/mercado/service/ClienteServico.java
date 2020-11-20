@@ -15,8 +15,8 @@ public class ClienteServico {
     @Autowired
     ClienteRepository clienteRepository;
 
-    @Autowired
-    ReclamacaoServico reclamacaoServico;
+//    ReclamacaoServico reclamacaoServico = new ReclamacaoServico();
+
     public Cliente cadastrarCliente(Cliente cliente){
         try {
             cliente.setDataCadastro(new Date());
@@ -69,14 +69,9 @@ public class ClienteServico {
             return false;
         }
     }
-    public void realizarReclamacao(String cpf, String reclamacao){
-        Cliente cliente = this.confirmarIdentificacao(cpf);
-        reclamacaoServico.realizarReclamacao(cliente.getCpf(), reclamacao);
-    }
-    public void registraReclamacao(String cpf, String reclamacaoTxt){
-        Cliente cliente = this.confirmarIdentificacao(cpf);
-        Reclamacao reclamacao = new Reclamacao(cliente.getCpf(),reclamacaoTxt);
-        reclamacao.save();
-    }
+//    public void registraReclamacao(String cpf, String reclamacaoTxt){
+//        Cliente cliente = this.confirmarIdentificacao(cpf);
+//        reclamacaoServico.realizarReclamacao(cliente.getCpf(), reclamacaoTxt);
+//    }
 
 }
