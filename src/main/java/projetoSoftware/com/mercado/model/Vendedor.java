@@ -1,9 +1,7 @@
 package projetoSoftware.com.mercado.model;
 
-import projetoSoftware.com.mercado.model.Usuario;
 
-
-public class Vendedor extends Usuario {
+public class Vendedor extends projetoSoftware.com.models.Usuario {
 
 
 }

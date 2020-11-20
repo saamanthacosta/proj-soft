@@ -1,6 +1,7 @@
 package projetoSoftware.com.mercado.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import projetoSoftware.com.mercado.enumerado.statusVenda;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@Builder
 @Table(name = "venda")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,7 +38,7 @@ public class Venda {
     private Date data;
 
     @Column(name = "status")
-    private Enum<statusVenda> status;
+    private statusVenda status;
 
 
 }

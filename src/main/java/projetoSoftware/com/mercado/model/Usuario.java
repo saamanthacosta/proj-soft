@@ -26,16 +26,4 @@ public abstract class Usuario {
     @Column(name = "nome")
     private String nome;
 
-    public Usuario(String login, String senha, String nome, String identificador) {
-        this.login = login;
-        this.senha = senha;
-        this.nome = nome;
-        this.identificador = identificador;
-
-    }
-
-    public String getLogin() {
-        return this.login;
-    }
-
 }
