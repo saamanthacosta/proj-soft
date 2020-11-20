@@ -11,16 +11,44 @@ public class EstoqueService {
     @Autowired
     EstoqueRepository estoqueRepository;
 
-    public Estoque getByProdutoId(int id){
+    public Estoque getByProdutoId(int id) {
         return estoqueRepository.findByCodigoDeBarrasProduto(id);
     }
 
-   public Estoque addEstoque(int codigoDeBarrasProduto, int qtdAdd){
-        try{
-            Estoque estoque = this.estoqueRepository.findByCodigoDeBarrasProduto(codigoDeBarrasProduto);
-            estoqueRepository.addEstoque(qtdAdd);
-
+    public Estoque addEstoque(int codigoDeBarrasProduto, int qtdAdd) {
+        try {
+            Estoque estoque = this.confirmarCodBarras(codigoDeBarrasProduto);
+            estoque.addEstoque(qtdAdd);
+            Estoque novo = estoqueRepository.save(estoque);
+            System.out.println("EstoqueServico :: adicionarEstoque :: quantidade adicionada no estoque " + novo.getCodigoDeBarrasProduto());
+            return novo;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-   }
+    }
+
+    public Estoque retiraEstoque(int codigoDeBarrasProduto, int qtdRetira) {
+        try {
+            Estoque estoque = this.confirmarCodBarras(codigoDeBarrasProduto);
+            estoque.retiraEstoque(qtdRetira);
+            Estoque novo = estoqueRepository.save(estoque);
+            System.out.println("EstoqueServico :: adicionarEstoque :: quantidade retirada do estoque " + novo.getCodigoDeBarrasProduto());
+            return novo;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Estoque confirmarCodBarras(int codigoDeBarrasProduto) {
+        try {
+            Estoque estoque = estoqueRepository.findByCodigoDeBarrasProduto(codigoDeBarrasProduto);
+            return estoque;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

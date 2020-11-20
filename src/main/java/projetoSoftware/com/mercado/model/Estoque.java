@@ -26,8 +26,18 @@ public class Estoque implements Serializable {
         return false;
     }
 
-    public void addEstoque(Estoque produtoAdicionado) {
-        this.setQuantidade(this.quantidade + produtoAdicionado.getQuantidade());
+    public void addEstoque(int qtdAdd) {
+        this.setQuantidade(this.getQuantidade() + qtdAdd);
+    }
+
+    public boolean retiraEstoque(int qtdRetira) {
+        if (qtdRetira <= this.getQuantidade()) {
+            this.setQuantidade(this.getQuantidade() - qtdRetira);
+            System.out.println("Quantidade atual no estoque = " + this.getQuantidade());
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

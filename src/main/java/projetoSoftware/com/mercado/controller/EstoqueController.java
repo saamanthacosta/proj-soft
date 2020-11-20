@@ -27,4 +27,10 @@ public class EstoqueController {
         Estoque produtoAdicionado = estoqueService.addEstoque(codigoDeBarrasProduto, qtdAdd);
         return new ResponseEntity<>("{\"Mensagem\": \"Estoque add.\"}", HttpStatus.OK);
     }
+
+    @PostMapping(path = "/retiraEstoque")
+    public ResponseEntity<?> retiraEstoque(@RequestParam int codigoDeBarrasProduto, @RequestParam int qtdRetira) {
+        Estoque produtoRetirado = estoqueService.retiraEstoque(codigoDeBarrasProduto, qtdRetira);
+        return new ResponseEntity<>("{\"Mensagem\": \"Estoque retira.\"}", HttpStatus.OK);
+    }
 }
