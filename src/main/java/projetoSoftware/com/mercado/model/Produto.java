@@ -5,33 +5,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "produto")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto {
+public class Produto implements Serializable {
 
-    @Column(name = "identificador")
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer identificador;
+    @Column(name = "codigo_barras")
+    private Integer codigoDeBarras;
     @Column(name = "nome")
     private String nome;
     @Column(name = "preco")
     private Float preco;
-    @Column(name = "codigo_barras")
-    private Integer codigoDeBarras;
     @Column(name = "fornecedor")
     private String fornecedor;
-    @Column(name = "quantidade")
-    private Integer quantidade;
-
-    boolean verificarDisponibilidade(int quantidade) {
-        if (quantidade > 0) return true;
-        return false;
-    }
+    @JoinColumn(name = "codigo_barras")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Estoque estoque;
 
     public void atualizaProduto(Produto produto) {
         this.setNome(produto.getNome());
