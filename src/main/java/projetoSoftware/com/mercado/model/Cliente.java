@@ -3,17 +3,8 @@ package projetoSoftware.com.mercado.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import projetoSoftware.com.mercado.repository.ReclamacaoRepository;
-
-import javax.annotation.sql.DataSourceDefinition;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.concurrent.RecursiveAction;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,8 +18,6 @@ public class Cliente {
     private String identidade;
     @Column(name = "email")
     private String email;
-    //    @OneToOne
-//    private Endereco endereco;
     @Column(name ="prefencial")
     private boolean prefencial;
     @Column(name="pontosAcumulados")
@@ -36,6 +25,8 @@ public class Cliente {
     @Column(name="dataCadastro")
     private Date dataCadastro;
 
+    @OneToOne(mappedBy = "venda")
+    private Venda venda;
 
     public Cliente(String cpf, String identidade, String email, boolean prefencial, int pontosAcumlados){
         this.cpf = cpf;

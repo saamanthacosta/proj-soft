@@ -4,5 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import projetoSoftware.com.mercado.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
-    Usuario login(Usuario usuario);
+   Usuario save(Usuario usuario);
+   Usuario findByUsuario(String usuario);
 }
