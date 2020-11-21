@@ -15,11 +15,14 @@ import java.io.Serializable;
 public class Estoque implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "codigo_barras_produto")
-    Integer codigoDeBarrasProduto;
+    @JoinColumn(name="codigo_barras_produto")
+    private Integer codigoDeBarrasProduto;
     @Column(name = "quantidade")
-    int quantidade;
+    private int quantidade;
+
+    @OneToOne(mappedBy = "produto")
+    private Produto produto;
+
 
     boolean verificarDisponibilidade(int quantidade) {
         if (quantidade > 0) return true;
