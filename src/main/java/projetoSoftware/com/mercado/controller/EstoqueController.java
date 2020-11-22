@@ -14,7 +14,7 @@ public class EstoqueController {
     @Autowired
     EstoqueService estoqueService;
 
-    @RequestMapping(path = "/get_one/{identificador}", method = RequestMethod.GET)
+    @RequestMapping(path = "/consulta/{identificador}", method = RequestMethod.GET)
     public ResponseEntity<?> getProdutoById(
             @PathVariable int identificador
     ) {

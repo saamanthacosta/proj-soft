@@ -2,9 +2,11 @@ package projetoSoftware.com.mercado;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Date;
 
+@EnableSwagger2
 @SpringBootApplication
 public class JpaExampleApplication {
 
