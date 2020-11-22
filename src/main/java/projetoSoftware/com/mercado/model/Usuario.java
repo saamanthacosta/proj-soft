@@ -1,30 +1,29 @@
-package projetoSoftware.com.mercado.model;
+package projetoSoftware.com.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
-@Entity
-@Table(name = "usuario")
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
-    @Column(name = "identificador")
+@Entity
+@Table(name = "usuario")
+public abstract class Usuario {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String id;
-    @Column(name = "nome")
-    private String nome;
-    @Column(name = "usuario")
-    private String usuario;
+    @Column(name = "identificador")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String identificador;
+    @Column(name = "login")
+    private String login;
     @Column(name = "senha")
     private String senha;
-    @Column(name = "cargo")
-    private String cargo;
-
-
+    @Column(name = "nome")
+    private String nome;
 
 }

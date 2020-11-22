@@ -38,7 +38,7 @@ public class Venda {
     private Date data;
 
     @Column(name = "status")
-    private Enum<statusVenda> status;
+    private statusVenda status;
 
 
 }
