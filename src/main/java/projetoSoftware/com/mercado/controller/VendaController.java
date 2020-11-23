@@ -14,17 +14,16 @@ import java.util.ArrayList;
 @RequestMapping("/venda")
 public class VendaController {
 
-//    @Autowired
-//    VendaServico vendaServico;
-//
-//    @PostMapping(path = "/registrar")
-//    public ResponseEntity<?> registrarVenda(@RequestBody ArrayList<Estoque> produtos, @RequestParam String vendedor, @RequestParam String cliente, @RequestParam String formapagamento) {
-//    try{
-//        Venda venda = vendaServico.criarVenda(cliente, vendedor,produtos,formapagamento);
-//        return new ResponseEntity<Venda>(venda, HttpStatus.OK);
-//    }catch (Exception err){
-//
-//    }
-//
-//    }
+    @Autowired
+    VendaServico vendaServico;
+
+    @PostMapping(path = "/registrar")
+    public ResponseEntity<?> registrarVenda(@RequestBody ArrayList<Estoque> produtos, @RequestParam String vendedor, @RequestParam String cliente, @RequestParam String formapagamento) {
+    try{
+        Venda venda = vendaServico.criarVenda(cliente, vendedor,produtos,formapagamento);
+        return new ResponseEntity<Venda>(venda, HttpStatus.OK);
+    }catch (Exception err){
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    }
 }

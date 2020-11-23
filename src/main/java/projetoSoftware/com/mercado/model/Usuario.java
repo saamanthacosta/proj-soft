@@ -1,4 +1,4 @@
-package projetoSoftware.com.models;
+package projetoSoftware.com.mercado.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,17 +13,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "usuario")
-public abstract class Usuario {
+public class Usuario {
 
     @Id
     @Column(name = "identificador")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String identificador;
-    @Column(name = "login")
-    private String login;
+    private int identificador;
+    @Column(name = "usuario")
+    private String usuario;
     @Column(name = "senha")
     private String senha;
     @Column(name = "nome")
     private String nome;
+    @Column(name = "cargo")
+    private String cargo;
 
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projetoSoftware.com.mercado.model.Usuario;
 import projetoSoftware.com.mercado.model.Venda;
 import projetoSoftware.com.mercado.model.Vendedor;
 import projetoSoftware.com.mercado.service.VendedorServico;
@@ -18,11 +19,12 @@ public class VendedorController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Vendedor vendedor) {
         System.out.println("VendedorController :: login :: Tentando autenticar vendedor ");
-        boolean auth = vendedorServico.login(vendedor.getLogin(), vendedor.getSenha());
-        if (auth) {
-            return new ResponseEntity<Vendedor>(vendedor, HttpStatus.ACCEPTED);
+        Usuario vendedorAuth = vendedorServico.login(vendedor.getUsuario(), vendedor.getSenha());
+        vendedor.setSenha("");
+        if (vendedorAuth != null) {
+            return new ResponseEntity<Usuario>(vendedorAuth, HttpStatus.OK);
         }
-        return new ResponseEntity<Vendedor>(vendedor, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<String>("Não foi possivel autenticar vendedor", HttpStatus.UNAUTHORIZED);
 
     }
 
