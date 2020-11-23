@@ -24,18 +24,12 @@ public class Produto implements Serializable {
     private Float preco;
     @Column(name = "fornecedor")
     private String fornecedor;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="codigo_barras_produto",
+//            referencedColumnName = "codigo_barras_produto")
+//    private Estoque estoque;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="codigo_barras_produto",
-            referencedColumnName = "codigo_barras_produto")
-    private Estoque estoque;
-
-    public Produto (Integer codigoDeBarras,String nome,Float preco, String fornecedor){
-        this.nome = nome;
-        this.preco = preco;
-        this.fornecedor = fornecedor;
-        this.codigoDeBarras = codigoDeBarras;
-    }
     public void atualizaProduto(Produto produto) {
         this.setNome(produto.getNome());
         this.setPreco(produto.getPreco());

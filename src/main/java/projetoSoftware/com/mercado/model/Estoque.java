@@ -20,8 +20,8 @@ public class Estoque implements Serializable {
     @Column(name = "quantidade")
     private int quantidade;
 
-    @OneToOne(mappedBy = "produto")
-    private Produto produto;
+//    @OneToOne(mappedBy = "produto")
+//    private Produto produto;
 
 
     boolean verificarDisponibilidade(int quantidade) {

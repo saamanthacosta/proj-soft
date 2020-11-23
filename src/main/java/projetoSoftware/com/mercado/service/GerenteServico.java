@@ -3,6 +3,7 @@ package projetoSoftware.com.mercado.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projetoSoftware.com.mercado.enumerado.cargoEnum;
+import projetoSoftware.com.mercado.model.Gerente;
 import projetoSoftware.com.mercado.model.Usuario;
 import projetoSoftware.com.mercado.repository.UsuarioRepository;
 
@@ -22,6 +23,13 @@ public class GerenteServico {
             }return null;
 
         } catch (Exception err) {
+            return null;
+        }
+    }
+    public Usuario criarGerente(Usuario gerente){
+        try {
+            return usuarioRepository.save(gerente);
+        }catch (Exception e){
             return null;
         }
     }

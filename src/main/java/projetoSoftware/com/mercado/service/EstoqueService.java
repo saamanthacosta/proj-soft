@@ -19,6 +19,7 @@ public class EstoqueService {
         try {
             Estoque estoque = this.confirmarCodBarras(codigoDeBarrasProduto);
             estoque.addEstoque(qtdAdd);
+
             Estoque novo = estoqueRepository.save(estoque);
             System.out.println("EstoqueServico :: adicionarEstoque :: quantidade adicionada no estoque " + novo.getCodigoDeBarrasProduto());
             return novo;
@@ -48,6 +49,9 @@ public class EstoqueService {
     private Estoque confirmarCodBarras(int codigoDeBarrasProduto) {
         try {
             Estoque estoque = estoqueRepository.findByCodigoDeBarrasProduto(codigoDeBarrasProduto);
+            if (estoque == null){
+                return new Estoque(codigoDeBarrasProduto, 0);
+            }
             return estoque;
         } catch (Exception e) {
             e.printStackTrace();
