@@ -28,6 +28,12 @@ public class Produto implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Estoque estoque;
 
+    public Produto (Integer codigoDeBarras,String nome,Float preco, String fornecedor){
+        this.nome = nome;
+        this.preco = preco;
+        this.fornecedor = fornecedor;
+        this.codigoDeBarras = codigoDeBarras;
+    }
     public void atualizaProduto(Produto produto) {
         this.setNome(produto.getNome());
         this.setPreco(produto.getPreco());
