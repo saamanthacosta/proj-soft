@@ -1,78 +1,50 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { routes } from './Config/routes';
+import LoginGerente from './Componentes/Paginas/LoginGerente';
+import LoginVendedor from './Componentes/Paginas/LoginVendedor';
+import Venda from './Componentes/Paginas/Venda';
+import DashboardGerente from './Componentes/Paginas/DashboardGerente';
+import GerenteStore from './Gerenciamento de Estados/Stores/GerenteStore';
+import VendedorStore from './Gerenciamento de Estados/Stores/VendedorStore';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+const PrivateRouteGerente = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props =>
+        gerenteAutenticado() ?
+            <Component {...props} />
+            : <Redirect to={routes.INICIAR_SISTEMA} />
+    }
+    />
+);
 
-export default function SignIn() {
-  const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Iniciar sistema
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="E-mail"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Senha"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Entrar
-          </Button>
-        </form>
-      </div>
-    </Container>
-  );
+const PrivateRouteVendedor = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props =>
+        vendedorAutenticado() ?
+            <Component {...props} />
+            : <Redirect to={routes.INICIAR_SISTEMA} />
+    }
+    />
+);
+
+
+function gerenteAutenticado() {
+    return GerenteStore.gerenteLogado;
 }
+
+function vendedorAutenticado() {
+    return VendedorStore.vendedorLogado;
+}
+
+export default function App() {
+    return <>
+        <BrowserRouter>
+            <Switch >
+                <Route path={routes.INICIAR_SISTEMA} exact component={LoginGerente} />
+                <PrivateRouteGerente path={routes.DASHBOARD_GERENTE} exact component={DashboardGerente} />
+                <PrivateRouteGerente path={routes.LOGIN_VENDEDOR} exact component={LoginVendedor} />
+                <PrivateRouteVendedor path={routes.VENDA} exact component={Venda} />
+            </Switch>
+        </BrowserRouter>
+    </>;
+};

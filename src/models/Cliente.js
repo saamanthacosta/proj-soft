@@ -1,2 +1,0 @@
-var nome;
-var cpf;

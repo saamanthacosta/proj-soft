@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DashboardGerente from './DashboardGerente';
+import App from './App';
 
 ReactDOM.render(
-  <DashboardGerente />,
+  <App />,
   document.getElementById('root')
 );
