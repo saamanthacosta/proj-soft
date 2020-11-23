@@ -33,6 +33,10 @@ public class EstoqueService {
             Estoque estoque = this.confirmarCodBarras(codigoDeBarrasProduto);
             estoque.retiraEstoque(qtdRetira);
             Estoque novo = estoqueRepository.save(estoque);
+            if (novo == null) {
+                System.out.println("Não foi possível fazer a retirada do Estoque");
+                return null;
+            }
             System.out.println("EstoqueServico :: adicionarEstoque :: quantidade retirada do estoque " + novo.getCodigoDeBarrasProduto());
             return novo;
         } catch (Exception e) {

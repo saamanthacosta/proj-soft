@@ -24,8 +24,10 @@ public class Produto implements Serializable {
     private Float preco;
     @Column(name = "fornecedor")
     private String fornecedor;
-    @JoinColumn(name = "codigo_barras")
+
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="codigo_barras_produto",
+            referencedColumnName = "codigo_barras_produto")
     private Estoque estoque;
 
     public Produto (Integer codigoDeBarras,String nome,Float preco, String fornecedor){
