@@ -17,11 +17,11 @@ class VendedorStore extends EventEmitter {
 
     dispatcherCallBack(action) {
         switch (action.actionType) {
-            case 'LOGIN':
+            case 'LOGIN_VENDEDOR_ERRO':
                 this.vendedorLogado = true;
                 this.emit('CHANGE');
                 break;
-            case 'LOGIN_ERRO':
+            case 'LOGIN_VENDEDOR_ERRO':
                 this.erro.mensagem = action.value.mensagem;
                 this.emit('CHANGE');
                 break;

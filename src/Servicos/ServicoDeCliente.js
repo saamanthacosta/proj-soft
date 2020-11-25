@@ -1,18 +1,17 @@
-import Request from './Request';
+import Request, { API } from './Request';
+import { ROTAS } from '../Config/routes';
 
 class ServicoDeCliente {
     
     async verificarCPF(cpf) {
 
-        // let resultado = {
-        //     status: null
-        // }
+        let resposta = null;
 
-        // await Request.post('/login', usuario).then(resp => {
-        //     resultado.status = resp;
-        // });
+        await Request.get(ROTAS.API.cliente.verificarCpf + cpf)
+            .then( resultado => resposta = resultado)
+            .catch( erro => resposta = erro );
 
-        return true;
+        return resposta;
     };
 }
 

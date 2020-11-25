@@ -14,7 +14,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { selecionadosTabela, tabela } from '../../Estilização/estilizacao'
+import { selecionadosTabela, tabela } from '../../Estilizacao/estilizacao'
 
 const colunas = [
     { id: "item", numeric: false, disablePadding: false, label: "Nº Item" },

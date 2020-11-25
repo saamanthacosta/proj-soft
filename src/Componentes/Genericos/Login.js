@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { login } from '../../Estilização/estilizacao';
+import { login } from '../../Estilizacao/estilizacao';
 import Botao from '../Genericos/Botao';
 
 export default function Login(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { routes } from './Config/routes';
+import { ROTAS } from './Config/routes';
 import LoginGerente from './Componentes/Paginas/LoginGerente';
 import LoginVendedor from './Componentes/Paginas/LoginVendedor';
 import Venda from './Componentes/Paginas/Venda';
@@ -12,7 +12,7 @@ const PrivateRouteGerente = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props =>
         gerenteAutenticado() ?
             <Component {...props} />
-            : <Redirect to={routes.INICIAR_SISTEMA} />
+            : <Redirect to={ROTAS.INICIAR_SISTEMA} />
     }
     />
 );
@@ -22,7 +22,7 @@ const PrivateRouteVendedor = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props =>
         vendedorAutenticado() ?
             <Component {...props} />
-            : <Redirect to={routes.INICIAR_SISTEMA} />
+            : <Redirect to={ROTAS.INICIAR_SISTEMA} />
     }
     />
 );
@@ -40,10 +40,10 @@ export default function App() {
     return <>
         <BrowserRouter>
             <Switch >
-                <Route path={routes.INICIAR_SISTEMA} exact component={LoginGerente} />
-                <PrivateRouteGerente path={routes.DASHBOARD_GERENTE} exact component={DashboardGerente} />
-                <PrivateRouteGerente path={routes.LOGIN_VENDEDOR} exact component={LoginVendedor} />
-                <PrivateRouteVendedor path={routes.VENDA} exact component={Venda} />
+                <Route path={ROTAS.INICIAR_SISTEMA} exact component={LoginGerente} />
+                <PrivateRouteGerente path={ROTAS.DASHBOARD_GERENTE} exact component={DashboardGerente} />
+                <PrivateRouteGerente path={ROTAS.LOGIN_VENDEDOR} exact component={LoginVendedor} />
+                <PrivateRouteVendedor path={ROTAS.VENDA} exact component={Venda} />
             </Switch>
         </BrowserRouter>
     </>;

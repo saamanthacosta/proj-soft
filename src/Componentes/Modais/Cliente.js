@@ -5,7 +5,7 @@ import VendedorStore from '../../Gerenciamento de Estados/Stores/VendedorStore';
 import TextField from '@material-ui/core/TextField';
 import Modal from '../Genericos/Modal'
 import { withRouter } from "react-router-dom";
-import { routes } from '../../Config/routes';
+import { ROTAS } from '../../Config/routes';
 
 class Cliente extends Component {
 
@@ -29,7 +29,7 @@ class Cliente extends Component {
 
 
   redirecionar = () => {
-    return this.props.history.push(routes.VENDA);
+    return this.props.history.push(ROTAS.VENDA);
   }
 
   abrir = () => {
@@ -63,7 +63,7 @@ class Cliente extends Component {
   }
   
   onClick = () => {
-    ClienteActions.verificarCPF(this.state.CPF);
+    ClienteActions.verificarCPF(this.state.CPF.replace(/[^\d]+/g,''));
   }
 
   render() {

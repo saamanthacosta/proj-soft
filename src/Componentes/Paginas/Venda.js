@@ -14,7 +14,7 @@ import InserirProduto from '../Modais/InserirProduto';
 import CancelarCompra from '../Modais/CancelarCompra';
 import ModalActions from '../../Gerenciamento de Estados/Actions/ModalActions';
 import ProdutoStore from '../../Gerenciamento de Estados/Stores/ProdutoStore';
-import { BotaoCancelarCompra, BotaoFinalizarCompra, BotaoInserirProduto, venda } from '../../Estilização/estilizacao';
+import { BotaoCancelarCompra, BotaoFinalizarCompra, BotaoInserirProduto, venda } from '../../Estilizacao/estilizacao';
 import FinalizarCompra from '../Modais/FinalizarCompra';
 
 const classe = venda;

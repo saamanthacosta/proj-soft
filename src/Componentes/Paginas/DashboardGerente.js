@@ -10,16 +10,16 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { dashboardGerente } from '../../Estilização/estilizacao';
-import { Icon } from '../../Estilização/icon';
-import { routes } from '../../Config/routes'
+import { dashboardGerente } from '../../Estilizacao/estilizacao';
+import { Icon } from '../../Estilizacao/icon';
+import { ROTAS } from '../../Config/routes'
 import { NavLink } from 'react-router-dom';
 
 export default function DashboardGerente() {
   const classes = dashboardGerente();
 
   const itensMenu = <>
-    <NavLink to={routes.LOGIN_VENDEDOR} style={{color: 'inherit', textDecoration: 'none'}}>
+    <NavLink to={ROTAS.LOGIN_VENDEDOR} style={{color: 'inherit', textDecoration: 'none'}}>
       <ListItem button>
         <ListItemIcon>
           <Icon.ShoppingCart />

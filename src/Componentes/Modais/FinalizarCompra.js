@@ -5,7 +5,7 @@ import VendaActions from '../../Gerenciamento de Estados/Actions/VendaActions';
 import Modal from '../Genericos/Modal'
 import { FormaDePagamento } from '../../Modelos/FormaDePagamento'
 import { withRouter } from "react-router-dom";
-import { routes } from '../../Config/routes';
+import { ROTAS } from '../../Config/routes';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -37,7 +37,7 @@ class FinalizarCompra extends Component {
 
 
     redirecionar = () => {
-        return this.props.history.push(routes.LOGIN_VENDEDOR);
+        return this.props.history.push(ROTAS.LOGIN_VENDEDOR);
     }
 
     abrir = () => {

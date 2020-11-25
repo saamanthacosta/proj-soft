@@ -1,5 +1,5 @@
 # dependencies
 /node_modules
-.package-lock.json
-.debug.log
+package-lock.json
+debug.log
 /.vscode

@@ -17,11 +17,11 @@ class GerenteStore extends EventEmitter {
 
     dispatcherCallBack(action) {
         switch (action.actionType) {
-            case 'LOGIN':
+            case 'LOGIN_GERENTE':
                 this.gerenteLogado = true;
                 this.emit('LOGIN');
                 break;
-            case 'LOGIN_ERRO':
+            case 'LOGIN_GERENTE_ERRO':
                 this.erro.mensagem = action.value.mensagem;
                 this.emit('ERRO');
                 break;

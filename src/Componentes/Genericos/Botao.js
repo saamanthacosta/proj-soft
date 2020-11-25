@@ -1,4 +1,4 @@
-import {BotaoPadrao} from '../../Estilização/estilizacao'
+import {BotaoPadrao} from '../../Estilizacao/estilizacao'
 
 export default function Botao(props) {
 

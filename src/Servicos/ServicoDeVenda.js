@@ -1,16 +1,14 @@
 import Request from './Request';
+import { ROTAS } from '../Config/routes';
 
 class ServicoDeVenda {
     
     async cadastrar(usuario) {
 
-        // let resultado = {
-        //     status: null
-        // }
 
-        // await Request.post('/login', usuario).then(resp => {
-        //     resultado.status = resp;
-        // });
+        // let resultado = await Request.post(ROTAS.API.venda.cadastrar, venda);
+
+        // return resultado;
 
         return true;
     };

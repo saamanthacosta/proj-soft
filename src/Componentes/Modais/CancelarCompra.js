@@ -6,7 +6,7 @@ import ModalStore from '../../Gerenciamento de Estados/Stores/ModalStore';
 import TextField from '@material-ui/core/TextField';
 import Usuario from '../../Modelos/Usuario';
 import { withRouter } from "react-router-dom";
-import { routes } from '../../Config/routes';
+import { ROTAS } from '../../Config/routes';
 
 class CancelarCompra extends Component {
 
@@ -30,7 +30,7 @@ class CancelarCompra extends Component {
 
 
   redirecionar = () => {
-    return this.props.history.push(routes.LOGIN_VENDEDOR);
+    return this.props.history.push(ROTAS.LOGIN_VENDEDOR);
   }
 
   abrir = () => {

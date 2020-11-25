@@ -7,13 +7,13 @@ class GerenteActions {
         ServicoDeGerente.autenticar(usuario).then(
             resp => {
                 Dispatcher.dispatch({
-                    actionType: 'LOGIN',
+                    actionType: 'LOGIN_GERENTE',
                     value: resp
                 });
             },
             erro => {
                 Dispatcher.dispatch({
-                    actionType: 'LOGIN_ERRO',
+                    actionType: 'LOGIN_GERENTE_ERRO',
                     value:  {
                         status:  'ERRO',
                         mensagem: erro.response.data

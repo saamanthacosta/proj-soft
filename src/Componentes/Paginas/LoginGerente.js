@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Login from '../Genericos/Login';
 import GerenteActions from '../../Gerenciamento de Estados/Actions/GerenteActions';
 import GerenteStore from '../../Gerenciamento de Estados/Stores/GerenteStore';
-import { routes } from '../../Config/routes'
+import { ROTAS } from '../../Config/routes'
 import Usuario from '../../Modelos/Usuario';
 
 export default class LoginGerente extends Component {
@@ -23,7 +23,7 @@ export default class LoginGerente extends Component {
   }
 
   redirecionar = () => {
-    return this.props.history.push(routes.DASHBOARD_GERENTE);
+    return this.props.history.push(ROTAS.DASHBOARD_GERENTE);
   }
 
   onChange = (evento) => {
