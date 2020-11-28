@@ -5,5 +5,4 @@ public enum statusVenda {
     FINALIZADA,
     CANCELADA,
     TROCA
-
 }
