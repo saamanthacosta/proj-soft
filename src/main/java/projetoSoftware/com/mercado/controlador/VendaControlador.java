@@ -18,9 +18,9 @@ public class VendaControlador {
     VendaServico vendaServico;
 
     @PostMapping(path = "/registrar")
-    public ResponseEntity<?> registrarVenda(@RequestBody ArrayList<Estoque> produtos, @RequestParam String vendedor, @RequestParam String cliente, @RequestParam String formapagamento) {
+    public ResponseEntity<?> registrar(@RequestBody ArrayList<Estoque> produtos, @RequestParam String vendedor, @RequestParam String cliente, @RequestParam String formapagamento) {
         try {
-            Venda venda = vendaServico.criarVenda(cliente, vendedor, produtos, formapagamento);
+            Venda venda = vendaServico.criar(cliente, vendedor, produtos, formapagamento);
             return new ResponseEntity<Venda>(venda, HttpStatus.OK);
         } catch (Exception err) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

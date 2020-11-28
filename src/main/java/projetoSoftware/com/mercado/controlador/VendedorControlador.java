@@ -29,12 +29,12 @@ public class VendedorControlador {
     }
 
     @PostMapping("/iniciaVenda")
-    public ResponseEntity<?> iniciarVenda(@RequestParam String cliente, @RequestParam String vendedor) {
+    public ResponseEntity<?> iniciar(@RequestParam String cliente, @RequestParam String vendedor) {
         System.out.println("VendedorController :: iniciarVenda :: Iniciando venda");
 
-        Venda venda = vendedorServico.iniciarVenda(cliente, vendedor);
+        Venda venda = vendedorServico.iniciar(cliente, vendedor);
         if (venda != null) {
-            return new ResponseEntity<Venda>(vendedorServico.iniciarVenda(cliente, vendedor), HttpStatus.OK);
+            return new ResponseEntity<Venda>(vendedorServico.iniciar(cliente, vendedor), HttpStatus.OK);
         }
         return new ResponseEntity<Venda>(HttpStatus.METHOD_NOT_ALLOWED);
     }

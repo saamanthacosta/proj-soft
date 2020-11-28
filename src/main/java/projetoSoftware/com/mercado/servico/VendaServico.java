@@ -22,7 +22,7 @@ public class VendaServico {
     @Autowired
     ProdutoService produtoService;
 
-    public Venda criarVenda(String cliente, String vendedor, ArrayList<Estoque> produtos, String formaPagamento) {
+    public Venda criar(String cliente, String vendedor, ArrayList<Estoque> produtos, String formaPagamento) {
         try {
 
             Venda venda = Venda.builder().cliente(cliente).vendedor(vendedor).data(new Date()).formaPagamento(formaPagamento).totalAPagar(calculaPagamento(produtos)).build();

@@ -26,7 +26,7 @@ public class VendedorServico {
         }
     }
 
-    public Venda iniciarVenda(String cliente_cpf, String vendedor_id) {
+    public Venda iniciar(String cliente_cpf, String vendedor_id) {
         //n eh pra ser feito
         return null;
     }
