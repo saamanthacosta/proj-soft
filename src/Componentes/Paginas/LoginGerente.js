@@ -10,16 +10,30 @@ export default class LoginGerente extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario: new Usuario()
+      usuario: new Usuario(),
+      erro: {
+        visualizacao: false,
+        mensagem: null
+      }
     }
   };
 
   componentDidMount() {
     GerenteStore.on('LOGIN', this.redirecionar);
+    GerenteStore.on('ERRO', this.exibirErro);
   }
 
   componentWillUnmount() {
     GerenteStore.removeListener('LOGIN', this.redirecionar)
+    GerenteStore.removeListener('ERRO', this.exibirErro)
+  }
+
+  exibirErro = () => {
+    let erro = {
+      visualizacao: true,
+      mensagem: GerenteStore.erro
+    }
+    this.setState({ erro })
   }
 
   redirecionar = () => {
@@ -38,10 +52,20 @@ export default class LoginGerente extends Component {
     e.preventDefault();
     GerenteActions.login(this.state.usuario);
   }
+  
+  fecharErro = () => {
+    let erro = {
+      visualizacao: false,
+      mensagem: null
+    }
+    this.setState({ erro })
+  }
 
   render() {
     return (
-      <Login realizarLogin={this.realizarLogin} onChange={this.onChange} tipoUsuario="Gerente" />
+      <Login realizarLogin={this.realizarLogin} onChange={this.onChange} tipoUsuario="Gerente" 
+      visualizacao={this.state.erro.visualizacao} mensagem={this.state.erro.mensagem} fecharErro={this.fecharErro}
+      />
     );
   }
 }

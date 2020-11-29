@@ -9,9 +9,7 @@ class VendedorStore extends EventEmitter {
         this.dispatchToken = Dispatcher.register(this.dispatcherCallBack.bind(this));
     };
 
-    erro = {
-        mensagem: ''
-    }
+    erro = null
 
     vendedorLogado = false;
 
@@ -19,11 +17,11 @@ class VendedorStore extends EventEmitter {
         switch (action.actionType) {
             case 'LOGIN_VENDEDOR_ERRO':
                 this.vendedorLogado = true;
-                this.emit('CHANGE');
+                this.emit('LOGIN');
                 break;
             case 'LOGIN_VENDEDOR_ERRO':
-                this.erro.mensagem = action.value.mensagem;
-                this.emit('CHANGE');
+                this.erro = action.value;
+                this.emit('ERRO');
                 break;
             default: break;
         };

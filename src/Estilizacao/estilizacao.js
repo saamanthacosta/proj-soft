@@ -174,6 +174,17 @@ export const modal = {
     }
 }
 
+export const produto = {
+    titulo: {
+        fontSize: 14,
+        marginBottom: 15
+      },
+      dado: {
+          marginTop: 15,
+        marginBottom: 10,
+      },
+}
+
 export const dashboardGerente = makeStyles((theme) => ({
     dashboard: {
         display: 'flex',

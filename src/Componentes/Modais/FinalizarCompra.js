@@ -75,15 +75,15 @@ class FinalizarCompra extends Component {
     }
 
     finalizar = () => {
-        VendaActions.cadastrar(this.state.venda)
-
+        VendaActions.cadastrar(this.state.venda);
     }
 
     render() {
 
         return <>
 
-        {this.state.formaDePagamento === null && 
+        {
+            this.state.formaDePagamento === null && 
             <Modal fecharModal={this.fechar} aberto={this.state.aberto} titulo="Forma de pagamento" 
                 descricao="Selecione a forma de pagamento" onClick={this.onClick} botao='Finalizar Venda'
                 conteudo={

@@ -6,39 +6,16 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import { Avatar } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PersonIcon from '@material-ui/icons/Person';
 import Tabela from '../Genericos/Tabela';
 import CardProduto from '../Genericos/CardProduto';
 import InserirProduto from '../Modais/InserirProduto';
 import CancelarCompra from '../Modais/CancelarCompra';
-import ModalActions from '../../Gerenciamento de Estados/Actions/ModalActions';
-import ProdutoStore from '../../Gerenciamento de Estados/Stores/ProdutoStore';
-import { BotaoCancelarCompra, BotaoFinalizarCompra, BotaoInserirProduto, venda } from '../../Estilizacao/estilizacao';
 import FinalizarCompra from '../Modais/FinalizarCompra';
-
-const classe = venda;
-
-const  criarData = (item, nome, valorUnitario, quantidade) => {
-    var valorTotal = valorUnitario * quantidade;
-    return { item, nome, valorUnitario, quantidade, valorTotal };
-}
-
-const produtos = [
-    criarData(1, "Cupcake", 30.5, 3),
-    criarData(2, "Donut", 4.52, 2),
-    criarData(3, "Eclair", 26.2, 16),
-    criarData(4, "Frozen yoghurt", 15.9, 6),
-    criarData(5, "Gingerbread", 35.6, 16),
-    criarData(6, "Honeycomb", 4.08, 3),
-    criarData(7, "Ice cream sandwich", 23.7, 9),
-    criarData(8, "dasdsadsa", 35.6, 16),
-    criarData(9, "daseada", 4.08, 3),
-    criarData(10, "safaIce cream sandwich", 23.7, 9),
-    criarData(11, "Gingereaeeebread", 35.6, 1),
-    criarData(12, "Honeycadasdsomb", 4.08, 3),
-    criarData(13, "Ice creamdadsaasa sandwich", 23.7, 2)
-];
+import ClienteStore from '../../Gerenciamento de Estados/Stores/ClienteStore';
+import ProdutoStore from '../../Gerenciamento de Estados/Stores/ProdutoStore';
+import ModalActions from '../../Gerenciamento de Estados/Actions/ModalActions';
+import { Icon } from '../../Estilizacao/icon';
+import { BotaoCancelarCompra, BotaoFinalizarCompra, BotaoInserirProduto, venda } from '../../Estilizacao/estilizacao';
 
 export default class Venda extends Component {
 
@@ -46,13 +23,10 @@ export default class Venda extends Component {
         super(props);
         this.state = {
             venda: '',
-            produtos: produtos.reverse(),
-            valorTotal: 0
-        }
-
-        this.cliente = {
-            nome: 'Paulo',
-            tipo: 'Preferencial'
+            produtos: [],
+            valorTotal: 0,
+            cliente: ClienteStore.cliente,
+            ultimoProduto: ProdutoStore.produto
         }
 
         this.modal = {
@@ -64,10 +38,12 @@ export default class Venda extends Component {
 
     componentDidMount() {
         ProdutoStore.on('DISPONIBILIDADE', this.adicionarProduto);
+        ProdutoStore.on('ITEM_REMOVIDO', this.atualizarValorTotal);
     }
 
     componentWillUnmount() {
         ProdutoStore.removeListener('DISPONIBILIDADE', this.adicionarProduto);
+        ProdutoStore.removeListener('ITEM_REMOVIDO', this.atualizarValorTotal);
     }
 
     abrirModal = (tipo, evento) => {
@@ -80,7 +56,7 @@ export default class Venda extends Component {
         produtoAdicionado.item = this.state.produtos.length + 1;
         var produtos = this.state.produtos;
         produtos.unshift(produtoAdicionado);
-        this.setState({ produtos });
+        this.setState({ produtos, ultimoProduto: ProdutoStore.produto });
 
         this.atualizarValorTotal();
     }
@@ -96,49 +72,52 @@ export default class Venda extends Component {
             <CssBaseline />
             <CancelarCompra />
             <InserirProduto />
-            <FinalizarCompra valorTotal={this.state.valorTotal} venda={this.state.venda} />
+            <FinalizarCompra valorTotal={this.state.valorTotal} venda={this.state.venda} cliente={this.state.cliente} />
             <AppBar position="relative" style={{ backgroundColor: '#b71c1c', color: '#fff' }}>
                 <Toolbar style={{display: 'block', height: 80 + 'px'}}>
                     <div style={{marginTop: 10 +'px'}}>
-                    <ShoppingCartIcon style={classe.espacamentoIcon} />
+                    <Icon.CarrinhoDeCompras style={venda.espacamentoIcon} />
                     <Typography variant="h5" color="inherit" display="inline">
-                        Bem vindo, {this.cliente.nome}
+                        Bem vindo, {this.state.cliente != null ? this.state.cliente.nome : 'Cliente' }!
                     </Typography>
                     </div>
                     <Typography variant="subtitle1" color="inherit" style={{marginLeft: 33 + 'px'}}>
-                        Cliente {this.cliente.tipo}
+                        Cliente {
+                        this.state.cliente !== null ? this.state.preferencial ? 'Preferencial' : 'Convencional' : 'Convencional' }
                     </Typography>
-                    <div style={classe.dadosDoVendedor}>
-                        <Avatar style={classe.iconeVendedor}>
-                            <PersonIcon />
+                    <div style={venda.dadosDoVendedor}>
+                        <Avatar style={venda.iconeVendedor}>
+                            <Icon.Usuario />
                         </Avatar>
                     </div>
                 </Toolbar>
             </AppBar>
 
-            <div style={classe.grid}>
+            <div style={venda.grid}>
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
-                        <CardProduto />
+                        {
+                            this.state.ultimoProduto !== null ? <CardProduto produto={this.state.ultimoProduto} /> : null
+                        }
                     </Grid>
                     <Grid item xs={6}>
                         <Tabela produtos={this.state.produtos} />
                     </Grid>
                     <Grid item xs={2}>
-                        <BotaoCancelarCompra variant="contained" style={classe.botao} onClick={this.abrirModal.bind(this, this.modal.cancelar)}> Cancelar Compra </BotaoCancelarCompra>
+                        <BotaoCancelarCompra variant="contained" style={venda.botao} onClick={this.abrirModal.bind(this, this.modal.cancelar)}> Cancelar Compra </BotaoCancelarCompra>
                     </Grid>
                     <Grid item xs={2}>
-                        <BotaoInserirProduto variant="contained" style={classe.botao} onClick={this.abrirModal.bind(this, this.modal.inserir)}> Inserir Produto </BotaoInserirProduto>
+                        <BotaoInserirProduto variant="contained" style={venda.botao} onClick={this.abrirModal.bind(this, this.modal.inserir)}> Inserir Produto </BotaoInserirProduto>
                     </Grid>
                     <Grid item xs={2}>
-                        <BotaoFinalizarCompra variant="contained" style={classe.botao} onClick={this.abrirModal.bind(this, this.modal.finalizar)}> Finalizar Compra </BotaoFinalizarCompra>
+                        <BotaoFinalizarCompra variant="contained" style={venda.botao} onClick={this.abrirModal.bind(this, this.modal.finalizar)}> Finalizar Compra </BotaoFinalizarCompra>
                     </Grid>
                     <Grid item xs={4}>
                     </Grid>
                     <Grid item xs={2}>
-                        <Paper style={classe.paper}>
-                            <Typography variant="h6" style={classe.valorTotal}> Valor Total: </Typography>
-                            <Typography variant="h6" style={classe.valor}> {parseFloat(this.state.valorTotal).toFixed(2)} </Typography>
+                        <Paper style={venda.paper}>
+                            <Typography variant="h6" style={venda.valorTotal}> Valor Total: </Typography>
+                            <Typography variant="h6" style={venda.valor}> {parseFloat(this.state.valorTotal).toFixed(2)} </Typography>
                         </Paper>
                     </Grid>
                 </Grid>

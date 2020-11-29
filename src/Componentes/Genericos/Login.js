@@ -5,11 +5,14 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { login } from '../../Estilizacao/estilizacao';
-import Botao from '../Genericos/Botao';
+import Botao from './Botao';
+import Erro from './Erro';
+
 
 export default function Login(props) {
     return (
         <Container component="main" maxWidth="xs">
+            <Erro aberto={props.visualizacao} mensagem={props.mensagem} fecharErro={props.fecharErro} />
             <CssBaseline />
             <div style={login.paper}>
                 <Avatar style={login.avatar} >

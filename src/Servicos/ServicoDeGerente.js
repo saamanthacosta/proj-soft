@@ -4,10 +4,8 @@ import { ROTAS } from '../Config/routes';
 class ServicoDeGerente {
     
     async autenticar(usuario) {
-
-        // let resultado = await Request.post(ROTAS.API.vendedor.autenticar, usuario);
-
-        // return resultado;
+        
+        // return await Request.post(ROTAS.API.gerente.autenticar, usuario);
 
         return true;
     };

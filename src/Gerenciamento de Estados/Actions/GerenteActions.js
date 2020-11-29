@@ -5,19 +5,16 @@ class GerenteActions {
 
     login(usuario) {
         ServicoDeGerente.autenticar(usuario).then(
-            resp => {
+            sucesso => {
                 Dispatcher.dispatch({
                     actionType: 'LOGIN_GERENTE',
-                    value: resp
+                    value: sucesso
                 });
             },
             erro => {
                 Dispatcher.dispatch({
                     actionType: 'LOGIN_GERENTE_ERRO',
-                    value:  {
-                        status:  'ERRO',
-                        mensagem: erro.response.data
-                    }
+                    value:  erro
                 });
             }
         )

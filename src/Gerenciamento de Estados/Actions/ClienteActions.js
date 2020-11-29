@@ -5,20 +5,17 @@ class ClienteActions {
 
     verificarCPF(cpf) {
         ServicoDeCliente.verificarCPF(cpf).then(
-            resp => {
+            sucesso => {
                 Dispatcher.dispatch({
                     actionType: 'CPF_EXISTE',
-                    value: resp.value
+                    value: sucesso.data
                 });
             },
             erro => {
                 Dispatcher.dispatch({
                     actionType: 'CPF_ERRO',
-                    value:  {
-                        status:  'ERRO',
-                        mensagem: erro.response.data
-                    }
-                });
+                    value:  erro.data
+            })
             }
         )
     }

@@ -3,24 +3,27 @@ import ServicoDeProduto from '../../Servicos/ServicoDeProduto';
 
 class ProdutoActions {
 
-    verificarDisponibilidade(codigoDeBarras, quantidade) {
-        ServicoDeProduto.verificarDisponibilidade(codigoDeBarras, quantidade).then(
-            resp => {
+    verificarDisponibilidade(produto) {
+        ServicoDeProduto.verificarDisponibilidade(produto).then(
+            sucesso => {
                 Dispatcher.dispatch({
                     actionType: 'DISPONIBILIDADE',
-                    value: resp.value
+                    value: sucesso
                 });
             },
             erro => {
                 Dispatcher.dispatch({
                     actionType: 'DISPONIBILIDADE_ERRO',
-                    value:  {
-                        status:  'ERRO',
-                        mensagem: erro.response.data
-                    }
+                    value:  erro
                 });
             }
         )
+    };
+
+    remover() {
+        Dispatcher.dispatch({
+            actionType: 'ITEM_REMOVIDO',
+        })
     }
 }
 

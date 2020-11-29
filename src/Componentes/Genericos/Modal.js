@@ -4,11 +4,10 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-
+import { Icon } from '../../Estilizacao/icon';
 import { modal } from '../../Estilizacao/estilizacao'
 
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -33,7 +32,7 @@ const DialogTitle = withStyles(styles)((props) => {
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon />
+                    <Icon.Fechar />
                 </IconButton>
             ) : null}
         </MuiDialogTitle>

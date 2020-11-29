@@ -13,8 +13,9 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Icon } from '../../Estilizacao/icon';
 import { selecionadosTabela, tabela } from '../../Estilizacao/estilizacao'
+import ProdutoActions from "../../Gerenciamento de Estados/Actions/ProdutoActions";
 
 const colunas = [
     { id: "item", numeric: false, disablePadding: false, label: "Nº Item" },
@@ -68,7 +69,7 @@ const TabelaToolbar = (props) => {
             {selecionados > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete" onClick={props.remover}>
-                        <DeleteIcon />
+                        <Icon.Lixeira />
                     </IconButton>
                 </Tooltip>
             ) : null}
@@ -132,6 +133,7 @@ export default class Tabela extends Component {
 
         this.setState({ selecionado: [] })
         this.setState({ produtos })
+        ProdutoActions.remover();
     }
 
     mudarPagina = (event, novaPagina) => {
@@ -172,7 +174,7 @@ export default class Tabela extends Component {
                                                     </TableCell>
                                                     <TableCell align="left">{linha.item}</TableCell>
                                                     <TableCell component="th" id={labelId} scope="row" padding="none">{linha.nome}</TableCell>
-                                                    <TableCell align="right">{linha.valorUnitario}</TableCell>
+                                                    <TableCell align="right">{linha.preco}</TableCell>
                                                     <TableCell align="right">{linha.quantidade}</TableCell>
                                                     <TableCell align="right">{parseFloat(linha.valorTotal).toFixed(2)}</TableCell>
                                                 </TableRow>
@@ -189,9 +191,9 @@ export default class Tabela extends Component {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <TablePagination
-                        rowsPerPageOptions={[10]} component="div" count={this.state.produtos.length} rowsPerPage={this.state.linhasPorPagina}
-                        page={this.state.pagina} onChangePage={this.mudarPagina} onChangeRowsPerPage={this.mudarLinhasPorPagina} />
+                    <TablePagination rowsPerPageOptions={[10]} component="div" count={this.state.produtos.length} 
+                        rowsPerPage={this.state.linhasPorPagina} page={this.state.pagina} onChangePage={this.mudarPagina} 
+                        onChangeRowsPerPage={this.mudarLinhasPorPagina} />
                 </Paper>
             </div>
         );

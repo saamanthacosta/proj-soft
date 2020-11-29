@@ -9,9 +9,7 @@ class GerenteStore extends EventEmitter {
         this.dispatchToken = Dispatcher.register(this.dispatcherCallBack.bind(this));
     };
 
-    erro = {
-        mensagem: ''
-    }
+    erro = null;
 
     gerenteLogado = false;
 
@@ -22,7 +20,7 @@ class GerenteStore extends EventEmitter {
                 this.emit('LOGIN');
                 break;
             case 'LOGIN_GERENTE_ERRO':
-                this.erro.mensagem = action.value.mensagem;
+                this.erro = action.value;
                 this.emit('ERRO');
                 break;
             default: break;

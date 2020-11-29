@@ -22,20 +22,20 @@ export default function DashboardGerente() {
     <NavLink to={ROTAS.LOGIN_VENDEDOR} style={{color: 'inherit', textDecoration: 'none'}}>
       <ListItem button>
         <ListItemIcon>
-          <Icon.ShoppingCart />
+          <Icon.CarrinhoDeCompras />
         </ListItemIcon>
         <ListItemText primary="Iniciar Venda" />
       </ListItem>
     </NavLink>
     <ListItem button>
       <ListItemIcon>
-        <Icon.People />
+        <Icon.Usuario />
       </ListItemIcon>
       <ListItemText primary="Cadastrar vendedor" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <Icon.People />
+        <Icon.Usuario />
       </ListItemIcon>
       <ListItemText primary="Cadastrar cliente" />
     </ListItem>
