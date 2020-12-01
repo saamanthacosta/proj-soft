@@ -9,7 +9,7 @@ import projetoSoftware.com.mercado.modelo.Produto;
 import projetoSoftware.com.mercado.modelo.Usuario;
 import projetoSoftware.com.mercado.servico.GerenteServico;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/gerente")
 @RestController
 public class GerenteControlador {

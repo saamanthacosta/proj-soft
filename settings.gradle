@@ -3,4 +3,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'jpa-example'
+rootProject.name = 'projeto-de-software'

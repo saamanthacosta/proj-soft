@@ -8,37 +8,35 @@ import projetoSoftware.com.mercado.modelo.Cliente;
 import projetoSoftware.com.mercado.servico.ClienteServico;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/cliente")
 public class ClienteControlador {
     @Autowired
     ClienteServico clienteServico;
-
-    @PostMapping("/cliente/cadastro")
-    public ResponseEntity cadastrarCliente(@RequestBody Cliente cliente) {
+    @PostMapping("/cadastro")
+    public ResponseEntity cadastrarCliente(@RequestBody Cliente cliente){
         System.out.println("ClienteControlador :: cadastrarCliente :: Entrou cliente" + cliente.toString());
         Cliente clienteGerado = clienteServico.cadastrarCliente(cliente);
         return new ResponseEntity<Cliente>(clienteGerado, HttpStatus.OK);
     }
-
-    @GetMapping("/cliente/identificar")
-    public ResponseEntity identificarCliente(@RequestParam String cpf) {
+    @GetMapping("/identificar")
+    public ResponseEntity identificarCliente(@RequestParam String cpf){
         Cliente cliente = clienteServico.confirmarIdentificacao(cpf);
-        if (cliente != null) {
-            return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<String>("cliente não encontrado", HttpStatus.NOT_FOUND);
+        if (cliente != null){
+        return new ResponseEntity<Cliente>(cliente,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Cliente não encontrado", HttpStatus.NOT_FOUND);
         }
     }
-
-    @PostMapping("/cliente/adicionarPontos")
-    public ResponseEntity<Cliente> adicionarPontos(@RequestParam String cpf, @RequestParam String pontos) {
-        System.out.println("ClienteControlador :: reclamacaoCliente :: Entrou cliente");
+    @PostMapping("/adicionarPontos")
+    public ResponseEntity<Cliente> adicionarPontos(@RequestParam String cpf, @RequestParam String pontos){
+        System.out.println("ClienteControlador :: reclamacaoCliente :: Entrou cliente" );
         Cliente cliente = clienteServico.adicionarPontos(cpf, Integer.parseInt(pontos));
         return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
     }
-
-    @PostMapping("/cliente/trocarPontos")
-    public ResponseEntity<String> trocarPontos(@RequestParam String cpf, @RequestParam String pontos) {
-        System.out.println("ClienteControlador :: reclamacaoCliente :: Entrou cliente");
+    @PostMapping("/trocarPontos")
+    public ResponseEntity<String> trocarPontos(@RequestParam String cpf, @RequestParam String pontos){
+        System.out.println("ClienteControlador :: reclamacaoCliente :: Entrou cliente" );
         boolean resposta = clienteServico.trocarPontos(cpf, Integer.parseInt(pontos));
         if (resposta) {
             return new ResponseEntity<String>("Pontos trocados com sucesso", HttpStatus.OK);

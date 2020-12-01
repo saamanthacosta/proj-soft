@@ -8,6 +8,7 @@ import projetoSoftware.com.mercado.modelo.Estoque;
 import projetoSoftware.com.mercado.servico.EstoqueService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/estoque")
 public class EstoqueControlador {
     @Autowired

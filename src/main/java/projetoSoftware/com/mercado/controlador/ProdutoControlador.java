@@ -8,7 +8,7 @@ import projetoSoftware.com.mercado.modelo.Produto;
 import projetoSoftware.com.mercado.servico.ProdutoService;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/produto")
 public class ProdutoControlador {

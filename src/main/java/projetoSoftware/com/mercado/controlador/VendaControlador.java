@@ -10,6 +10,7 @@ import projetoSoftware.com.mercado.servico.VendaServico;
 
 import java.util.ArrayList;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/venda")
 public class VendaControlador {

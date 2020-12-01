@@ -8,7 +8,7 @@ import projetoSoftware.com.mercado.modelo.Usuario;
 import projetoSoftware.com.mercado.modelo.Venda;
 import projetoSoftware.com.mercado.modelo.Vendedor;
 import projetoSoftware.com.mercado.servico.VendedorServico;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/vendedor")
 @RestController
 public class VendedorControlador {
