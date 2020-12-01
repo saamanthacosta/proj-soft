@@ -12,7 +12,7 @@ public class EstoqueService {
     EstoqueRepositorio estoqueRepositorio;
 
     public Estoque getByProdutoId(int id) {
-        return estoqueRepositorio.encontrarPorCodigoDeBarrasProduto(id);
+        return estoqueRepositorio.findByCodigoDeBarrasProduto(id);
     }
 
     public Estoque adcEstoque(int codigoDeBarrasProduto, int qtdAdc) {
@@ -50,7 +50,7 @@ public class EstoqueService {
 
     private Estoque confirmarCodBarras(int codigoDeBarrasProduto) {
         try {
-            Estoque estoque = estoqueRepositorio.encontrarPorCodigoDeBarrasProduto(codigoDeBarrasProduto);
+            Estoque estoque = estoqueRepositorio.findByCodigoDeBarrasProduto(codigoDeBarrasProduto);
             if (estoque == null) {
                 return new Estoque(codigoDeBarrasProduto, 0);
             }

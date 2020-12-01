@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import projetoSoftware.com.mercado.modelo.Produto;
 
 public interface ProdutoRepositorio extends JpaRepository<Produto, Integer> {
-    Produto encontrarPorCodigoDeBarras(Integer codigoDeBarras);
+    Produto findByCodigoDeBarras(Integer codigoDeBarras);
 
     Produto save(Produto produto);
 

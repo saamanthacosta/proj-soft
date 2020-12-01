@@ -21,7 +21,7 @@ public class ProdutoService {
     }
 
     public Produto getProdutoById(int codigoDeBarras) {
-        return produtoRepositorio.encontrarPorCodigoDeBarras(codigoDeBarras);
+        return produtoRepositorio.findByCodigoDeBarras(codigoDeBarras);
     }
 
     public void createProduto(Produto produto) {

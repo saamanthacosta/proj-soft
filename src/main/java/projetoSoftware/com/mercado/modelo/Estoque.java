@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Estoque implements Serializable {
 
     @Id
-    @JoinColumn(name = "codigo_barras_produto")
+    @Column(name = "codigo_de_barras_produto")
     private Integer codigoDeBarrasProduto;
     @Column(name = "quantidade")
     private int quantidade;
