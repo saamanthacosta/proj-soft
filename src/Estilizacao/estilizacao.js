@@ -198,6 +198,7 @@ export const dashboardGerente = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+        marginLeft: 200,
     },
     drawerPaper: {
         position: 'relative',

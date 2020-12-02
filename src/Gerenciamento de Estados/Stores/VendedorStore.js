@@ -1,5 +1,6 @@
 import Dispatcher from '../Dispatcher/Dispatcher'
 import { EventEmitter } from 'events';
+import Vendedor from '../../Modelos/Vendedor';
 
 class VendedorStore extends EventEmitter { 
 
@@ -11,12 +12,12 @@ class VendedorStore extends EventEmitter {
 
     erro = null
 
-    vendedorLogado = false;
+    vendedor = null;
 
     dispatcherCallBack(action) {
         switch (action.actionType) {
             case 'LOGIN_VENDEDOR_ERRO':
-                this.vendedorLogado = true;
+                this.vendedor = new Vendedor(action.value.identificador);
                 this.emit('LOGIN');
                 break;
             case 'LOGIN_VENDEDOR_ERRO':

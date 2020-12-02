@@ -61,7 +61,7 @@ class FinalizarCompra extends Component {
     onChangeDinheiro = (evento) => {
         evento.preventDefault();
         const { value } = evento.target;
-        var valorDevido = this.props.valorTotal;
+        var valorDevido = this.props.venda.valorTotal;
         var valorTroco = value - valorDevido;
         if (valorTroco <= 0) {
             this.setState({ valorTroco: 0 });

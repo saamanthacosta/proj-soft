@@ -8,13 +8,13 @@ class VendedorActions {
             sucesso => {
                 Dispatcher.dispatch({
                     actionType: 'LOGIN_VENDEDOR_ERRO',
-                    value: sucesso
+                    value: sucesso.data
                 });
             },
             erro => {
                 Dispatcher.dispatch({
                     actionType: 'LOGIN_VENDEDOR_ERRO',
-                    value:  erro
+                    value:  erro.data
                 });
             }
         )

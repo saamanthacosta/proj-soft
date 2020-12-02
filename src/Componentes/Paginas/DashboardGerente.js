@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -27,18 +26,6 @@ export default function DashboardGerente() {
         <ListItemText primary="Iniciar Venda" />
       </ListItem>
     </NavLink>
-    <ListItem button>
-      <ListItemIcon>
-        <Icon.Usuario />
-      </ListItemIcon>
-      <ListItemText primary="Cadastrar vendedor" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <Icon.Usuario />
-      </ListItemIcon>
-      <ListItemText primary="Cadastrar cliente" />
-    </ListItem>
   </>;
 
   return (
@@ -51,7 +38,7 @@ export default function DashboardGerente() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" classes={{ paper: clsx(classes.drawerPaper, false) }} open={true} >
+      <Drawer variant="permanent" classes={classes.drawerPaper} open={true} >
         <Divider />
         <List>{itensMenu}</List>
       </Drawer>

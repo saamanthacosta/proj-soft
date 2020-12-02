@@ -12,6 +12,7 @@ import InserirProduto from '../Modais/InserirProduto';
 import CancelarCompra from '../Modais/CancelarCompra';
 import FinalizarCompra from '../Modais/FinalizarCompra';
 import ClienteStore from '../../Gerenciamento de Estados/Stores/ClienteStore';
+import VendedorStore from '../../Gerenciamento de Estados/Stores/VendedorStore';
 import ProdutoStore from '../../Gerenciamento de Estados/Stores/ProdutoStore';
 import ModalActions from '../../Gerenciamento de Estados/Actions/ModalActions';
 import { Icon } from '../../Estilizacao/icon';
@@ -22,11 +23,13 @@ export default class Venda extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            venda: '',
-            produtos: [],
-            valorTotal: 0,
-            cliente: ClienteStore.cliente,
-            ultimoProduto: ProdutoStore.produto
+            venda: {
+                produtos: [],
+                valorTotal: 0,
+                cliente: ClienteStore.cliente,
+                vendedor: VendedorStore.vendedor
+            },
+            ultimoProduto: null
         }
 
         this.modal = {
@@ -53,8 +56,8 @@ export default class Venda extends Component {
 
     adicionarProduto = () => {
         var produtoAdicionado = ProdutoStore.produto
-        produtoAdicionado.item = this.state.produtos.length + 1;
-        var produtos = this.state.produtos;
+        produtoAdicionado.item = this.state.venda.produtos.length + 1;
+        var produtos = this.state.venda.produtos;
         produtos.unshift(produtoAdicionado);
         this.setState({ produtos, ultimoProduto: ProdutoStore.produto });
 
@@ -62,7 +65,7 @@ export default class Venda extends Component {
     }
 
     atualizarValorTotal = () => {
-        var valorTotal = this.state.produtos.map(({ valorTotal }) => valorTotal).reduce((sum, i) => sum + i, 0);
+        var valorTotal = this.state.venda.produtos.map(({ valorTotal }) => valorTotal).reduce((sum, i) => sum + i, 0);
         this.setState({valorTotal})
     }
 
@@ -72,18 +75,18 @@ export default class Venda extends Component {
             <CssBaseline />
             <CancelarCompra />
             <InserirProduto />
-            <FinalizarCompra valorTotal={this.state.valorTotal} venda={this.state.venda} cliente={this.state.cliente} />
+            <FinalizarCompra venda={this.state.venda} />
             <AppBar position="relative" style={{ backgroundColor: '#b71c1c', color: '#fff' }}>
                 <Toolbar style={{display: 'block', height: 80 + 'px'}}>
                     <div style={{marginTop: 10 +'px'}}>
                     <Icon.CarrinhoDeCompras style={venda.espacamentoIcon} />
                     <Typography variant="h5" color="inherit" display="inline">
-                        Bem vindo, {this.state.cliente != null ? this.state.cliente.nome : 'Cliente' }!
+                        Bem vindo, {this.state.venda.cliente != null ? this.state.venda.cliente.nome : 'Cliente' }!
                     </Typography>
                     </div>
                     <Typography variant="subtitle1" color="inherit" style={{marginLeft: 33 + 'px'}}>
                         Cliente {
-                        this.state.cliente !== null ? this.state.preferencial ? 'Preferencial' : 'Convencional' : 'Convencional' }
+                        this.state.venda.cliente !== null ? this.state.venda.cliente.preferencial ? 'Preferencial' : 'Convencional' : 'Convencional' }
                     </Typography>
                     <div style={venda.dadosDoVendedor}>
                         <Avatar style={venda.iconeVendedor}>
@@ -101,7 +104,7 @@ export default class Venda extends Component {
                         }
                     </Grid>
                     <Grid item xs={6}>
-                        <Tabela produtos={this.state.produtos} />
+                        <Tabela produtos={this.state.venda.produtos} />
                     </Grid>
                     <Grid item xs={2}>
                         <BotaoCancelarCompra variant="contained" style={venda.botao} onClick={this.abrirModal.bind(this, this.modal.cancelar)}> Cancelar Compra </BotaoCancelarCompra>
@@ -117,7 +120,7 @@ export default class Venda extends Component {
                     <Grid item xs={2}>
                         <Paper style={venda.paper}>
                             <Typography variant="h6" style={venda.valorTotal}> Valor Total: </Typography>
-                            <Typography variant="h6" style={venda.valor}> {parseFloat(this.state.valorTotal).toFixed(2)} </Typography>
+                            <Typography variant="h6" style={venda.valor}> {parseFloat(this.state.venda.valorTotal).toFixed(2)} </Typography>
                         </Paper>
                     </Grid>
                 </Grid>

@@ -13,12 +13,10 @@ export default function CardProduto(props) {
           Último produto a ser batido
         </Typography>
         <Typography variant="h5" component="h2">
-           Nome: {
-           props.produto.nome.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
-           }
+           Nome: { props.produto.nome }
         </Typography>
         <Typography style={produto.dado} color="textSecondary">
-           Preço: {props.produto.preco}
+           Preço: R$ {props.produto.preco},00
         </Typography>
         <Typography style={produto.dado} color="textSecondary">
           Código de Barras: {props.produto.codigoDeBarras}

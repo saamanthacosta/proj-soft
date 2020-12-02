@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Usuario from '../../Modelos/Usuario';
 import { withRouter } from "react-router-dom";
 import { ROTAS } from '../../Config/routes';
+import VendaActions from '../../Gerenciamento de Estados/Actions/VendaActions';
 
 class CancelarCompra extends Component {
 

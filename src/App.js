@@ -29,11 +29,19 @@ const PrivateRouteVendedor = ({ component: Component, ...rest }) => (
 
 
 function gerenteAutenticado() {
-    return GerenteStore.gerenteLogado;
+    if (GerenteStore.gerente === null) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function vendedorAutenticado() {
-    return VendedorStore.vendedorLogado;
+    if (VendedorStore.vendedor === null) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 export default function App() {

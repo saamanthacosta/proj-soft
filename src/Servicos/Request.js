@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API = axios.create({
-    baseURL: "http://localhost:8000/",
+    baseURL: "http://localhost:4000/",
     headers: {
         'Content-Type': 'application/json',
     }
@@ -18,13 +18,9 @@ class Request {
 
     };
 
-    async post(url, obj, headers) {
+    async post(url, obj) {
         try {
-            if (headers === null) {
-                return await API.post(url, obj);
-            } else {
-                return await API.post(url, obj, headers);
-            }
+            return await API.post(url, obj);
         } catch (erro) {
             return Promise.reject(erro.response)
         }

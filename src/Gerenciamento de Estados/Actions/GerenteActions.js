@@ -8,13 +8,13 @@ class GerenteActions {
             sucesso => {
                 Dispatcher.dispatch({
                     actionType: 'LOGIN_GERENTE',
-                    value: sucesso
+                    value: sucesso.data
                 });
             },
             erro => {
                 Dispatcher.dispatch({
                     actionType: 'LOGIN_GERENTE_ERRO',
-                    value:  erro
+                    value:  erro.data
                 });
             }
         )

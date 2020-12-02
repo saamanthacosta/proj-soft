@@ -5,9 +5,8 @@ class ServicoDeGerente {
     
     async autenticar(usuario) {
         
-        // return await Request.post(ROTAS.API.gerente.autenticar, usuario);
+        return await Request.post(ROTAS.API.gerente.autenticar, usuario);
 
-        return true;
     };
 }
 

@@ -172,8 +172,8 @@ export default class Tabela extends Component {
                                                     <TableCell padding="checkbox">
                                                         <Checkbox checked={itemEstaSelecionado} inputProps={{ "aria-labelledby": labelId }} />
                                                     </TableCell>
-                                                    <TableCell align="left">{linha.item}</TableCell>
-                                                    <TableCell component="th" id={labelId} scope="row" padding="none">{linha.nome}</TableCell>
+                                                    <TableCell align="left" id={labelId} >{linha.item}</TableCell>
+                                                    <TableCell component="th" scope="row" padding="none">{linha.nome}</TableCell>
                                                     <TableCell align="right">{linha.preco}</TableCell>
                                                     <TableCell align="right">{linha.quantidade}</TableCell>
                                                     <TableCell align="right">{parseFloat(linha.valorTotal).toFixed(2)}</TableCell>

@@ -8,10 +8,10 @@ export const ROTAS = {
     'VENDA': '/venda',
     API: {
         gerente: {
-            autenticar: ''
+            autenticar: 'gerente/iniciaSistema'
         },
         vendedor: {
-            autenticar: ''
+            autenticar: 'vendedor/login/'
         },
         cliente: {
             verificarCpf: 'cliente/identificar?cpf='
