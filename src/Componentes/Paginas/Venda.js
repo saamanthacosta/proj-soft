@@ -26,8 +26,8 @@ export default class Venda extends Component {
             venda: {
                 produtos: [],
                 valorTotal: 0,
-                cliente: ClienteStore.cliente,
-                vendedor: VendedorStore.vendedor
+                cliente: ClienteStore.cliente.cpf,
+                vendedor: VendedorStore.vendedor.id
             },
             ultimoProduto: null
         }
@@ -66,7 +66,11 @@ export default class Venda extends Component {
 
     atualizarValorTotal = () => {
         var valorTotal = this.state.venda.produtos.map(({ valorTotal }) => valorTotal).reduce((sum, i) => sum + i, 0);
-        this.setState({valorTotal})
+
+        let venda = this.state.venda;
+        venda.valorTotal = valorTotal;
+
+        this.setState({ venda })
     }
 
     render() {

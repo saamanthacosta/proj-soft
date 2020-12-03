@@ -4,6 +4,6 @@ export default class Venda {
         this.vendedor = vendedor;
         this.cliente = cliente;
         this.produtos = produtos;
-        this.formaDePagamento = formaDePagamento
+        this.formaDePagamento = formaDePagamento;
     }
 }

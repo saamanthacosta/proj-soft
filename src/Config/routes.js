@@ -21,7 +21,7 @@ export const ROTAS = {
             consultarPorId: 'produto/get_one/'
         },
         venda: {
-            cadastrar: 'venda/registrar/'
+            cadastrar: 'venda/registrar'
         }
     }
 };

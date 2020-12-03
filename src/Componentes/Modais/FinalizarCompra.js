@@ -11,6 +11,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { TextField } from '@material-ui/core';
+import Item from '../../Modelos/Item';
+import Venda from '../../Modelos/Venda';
 
 class FinalizarCompra extends Component {
 
@@ -21,7 +23,9 @@ class FinalizarCompra extends Component {
             venda: this.props.venda,
             pagamento: null,
             formaDePagamento: null,
-            valorTroco: 0
+            valorTroco: null,
+            pix: null,
+            cartao: null
         };
     }
 
@@ -74,8 +78,45 @@ class FinalizarCompra extends Component {
         this.setState({formaDePagamento: null})
     }
 
+    mudarPIX = (evento) => {
+        evento.preventDefault();
+        const { value } = evento.target;
+        this.setState({ pix: value })
+    }
+    
+    mudarCartao = (evento) => {
+        evento.preventDefault();
+        const { value } = evento.target;
+        this.setState({ cartao: value })
+    }
+
     finalizar = () => {
-        VendaActions.cadastrar(this.state.venda);
+        let produtos = [];
+        this.state.venda.produtos.forEach(produto => {
+            let item = new Item(produto.codigoDeBarras, parseInt(produto.quantidade));
+            produtos.push(item);
+        });
+
+        let pagamento = {
+            tipo: this.state.formaDePagamento,
+            numero: 0
+        };
+
+        switch (this.state.formaDePagamento) {
+            case (FormaDePagamento.PIX):
+                pagamento.numero = this.state.pix;
+                break;
+            case (FormaDePagamento.CARTAO_CREDITO):
+                pagamento.numero = this.state.cartao;
+                break;
+            case (FormaDePagamento.CARTAO_DEBITO):
+                pagamento.numero = this.state.cartao;
+                break;
+        }
+
+        let venda = new Venda(this.state.venda.vendedor, this.state.venda.cliente, produtos, pagamento);
+
+        VendaActions.cadastrar(venda);
     }
 
     render() {
@@ -89,10 +130,10 @@ class FinalizarCompra extends Component {
                 conteudo={
                     <FormControl component="fieldset">
                         <RadioGroup aria-label="gender" name="gender1" onChange={this.onChange}>
-                            <FormControlLabel value={FormaDePagamento.PIX} control={<Radio />} label={FormaDePagamento.PIX} />
-                            <FormControlLabel value={FormaDePagamento.CARTAO_CREDITO} control={<Radio />} label={FormaDePagamento.CARTAO_CREDITO} />
-                            <FormControlLabel value={FormaDePagamento.CARTAO_DEBITO} control={<Radio />} label={FormaDePagamento.CARTAO_DEBITO} />
-                            <FormControlLabel value={FormaDePagamento.DINHEIRO} control={<Radio />} label={FormaDePagamento.DINHEIRO} />
+                            <FormControlLabel value={FormaDePagamento.PIX} control={<Radio />} label='Pix' />
+                            <FormControlLabel value={FormaDePagamento.CARTAO_CREDITO} control={<Radio />} label='Cartão de Crédito' />
+                            <FormControlLabel value={FormaDePagamento.CARTAO_DEBITO} control={<Radio />} label='Cartão de Débito' />
+                            <FormControlLabel value={FormaDePagamento.DINHEIRO} control={<Radio />} label='Dinheiro' />
                         </RadioGroup>
                     </FormControl>
                 }
@@ -101,7 +142,7 @@ class FinalizarCompra extends Component {
         {
             this.state.formaDePagamento === FormaDePagamento.PIX &&
             <Modal fecharModal={this.fechar} aberto={this.state.aberto} titulo="Forma de pagamento - PIX" descricao="Insira a chave aleatória do PIX" 
-            onClick={this.onClick} botao='Finalizar Venda' possuiOutroBotao={true} outroBotao="Voltar" onClickOutroBotao={this.voltar}
+            onClick={this.finalizar} botao='Finalizar Venda' possuiOutroBotao={true} outroBotao="Voltar" onClickOutroBotao={this.voltar}
             conteudo= {
                 <TextField
                     autoFocus
@@ -109,7 +150,8 @@ class FinalizarCompra extends Component {
                     label="Chave aleatória PIX"
                     type="text"
                     name="chavePix"
-                    fullWidth
+                    fullWidth 
+                    onChange={this.mudarPIX}
                 />
             }
             />
@@ -117,7 +159,7 @@ class FinalizarCompra extends Component {
         {
             (this.state.formaDePagamento === FormaDePagamento.CARTAO_DEBITO || this.state.formaDePagamento === FormaDePagamento.CARTAO_CREDITO) &&
             <Modal fecharModal={this.fechar} aberto={this.state.aberto} titulo="Forma de pagamento - Cartão" descricao="Insira o número do cartão" 
-            onClick={this.onClick} botao='Finalizar Venda' possuiOutroBotao={true} outroBotao="Voltar" onClickOutroBotao={this.voltar}
+            onClick={this.finalizar} botao='Finalizar Venda' possuiOutroBotao={true} outroBotao="Voltar" onClickOutroBotao={this.voltar}
             conteudo= {
                 <TextField
                     autoFocus
@@ -126,6 +168,7 @@ class FinalizarCompra extends Component {
                     type="text"
                     name="numCartao"
                     fullWidth
+                    onChange={this.mudarCartao}
                 />
             }
             />
@@ -133,7 +176,7 @@ class FinalizarCompra extends Component {
         {
             this.state.formaDePagamento === FormaDePagamento.DINHEIRO &&
             <Modal fecharModal={this.fechar} aberto={this.state.aberto} titulo="Forma de pagamento - Dinheiro" descricao="Insira o valor pago em dinheiro" 
-            onClick={this.onClick} botao='Finalizar Venda' possuiOutroBotao={true} outroBotao="Voltar" onClickOutroBotao={this.voltar}
+            onClick={this.finalizar} botao='Finalizar Venda' possuiOutroBotao={true} outroBotao="Voltar" onClickOutroBotao={this.voltar}
             conteudo= {
                 <>
                 <TextField
