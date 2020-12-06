@@ -28,7 +28,6 @@ public class VendaServico {
             Venda concluida = vendaRepositorio.save(venda);
             System.out.println("VendaServico :: criarVenda :: VendaController " + concluida.getIdentificador());
             this.salvarProdutos(produtos, concluida.getIdentificador());
-            this.pagar(formaPagamento);
             return venda;
 
         } catch (Exception err) {
@@ -37,7 +36,8 @@ public class VendaServico {
         }
     }
     private String pagar(String formapagamento){
-        String[] infos = formapagamento.split(".");
+        String[] infos = formapagamento.split("\\.");
+        System.out.println(infos);
         if (infos[0] == formaPagamentoEnum.CARTAO){
             Cartao.pagar(infos[0],infos[1]);
         }else if(infos[0] == formaPagamentoEnum.PIX){
@@ -49,8 +49,12 @@ public class VendaServico {
         final float[] precoTotal = {0};
         produtos.forEach(estoque -> {
             Produto produto = produtoService.getProdutoById(estoque.getCodigoDeBarrasProduto());
+            if(produto != null){
             float valorTotalProduto = produto.getPreco() * estoque.getQuantidade();
             precoTotal[0] = precoTotal[0] + valorTotalProduto;
+            }else{
+                precoTotal[0]+=0;
+            }
         });
         return precoTotal[0];
     }
