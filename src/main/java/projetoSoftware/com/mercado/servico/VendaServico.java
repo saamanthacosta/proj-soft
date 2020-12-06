@@ -2,10 +2,8 @@ package projetoSoftware.com.mercado.servico;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import projetoSoftware.com.mercado.modelo.Estoque;
-import projetoSoftware.com.mercado.modelo.Produto;
-import projetoSoftware.com.mercado.modelo.ProdutoVenda;
-import projetoSoftware.com.mercado.modelo.Venda;
+import projetoSoftware.com.mercado.modelo.*;
+import projetoSoftware.com.mercado.enumerado.formaPagamentoEnum;
 import projetoSoftware.com.mercado.repositorio.ProdutoVendaRepositorio;
 import projetoSoftware.com.mercado.repositorio.VendaRepositorio;
 
@@ -21,15 +19,16 @@ public class VendaServico {
     ProdutoVendaRepositorio produtoVendaRepositorio;
     @Autowired
     ProdutoService produtoService;
-
+    @Autowired
+    EstoqueService estoqueService;
     public Venda criar(String cliente, String vendedor, ArrayList<Estoque> produtos, String formaPagamento) {
         try {
 
-            Venda venda = Venda.builder().cliente(cliente).vendedor(vendedor).data(new Date()).formaPagamento(formaPagamento).totalAPagar(calculaPagamento(produtos)).build();
+            Venda venda = Venda.builder().cliente(cliente).vendedor(vendedor).data(new Date()).formaPagamento(this.pagar(formaPagamento)).totalAPagar(calculaPagamento(produtos)).build();
             Venda concluida = vendaRepositorio.save(venda);
             System.out.println("VendaServico :: criarVenda :: VendaController " + concluida.getIdentificador());
             this.salvarProdutos(produtos, concluida.getIdentificador());
-
+            this.pagar(formaPagamento);
             return venda;
 
         } catch (Exception err) {
@@ -37,7 +36,15 @@ public class VendaServico {
             return null;
         }
     }
-
+    private String pagar(String formapagamento){
+        String[] infos = formapagamento.split(".");
+        if (infos[0] == formaPagamentoEnum.CARTAO){
+            Cartao.pagar(infos[0],infos[1]);
+        }else if(infos[0] == formaPagamentoEnum.PIX){
+            Pix.verificarChave(infos[1]);
+        }
+        return infos[0];
+    }
     private float calculaPagamento(ArrayList<Estoque> produtos) {
         final float[] precoTotal = {0};
         produtos.forEach(estoque -> {
@@ -52,6 +59,7 @@ public class VendaServico {
         produtos.forEach(produto -> {
             ProdutoVenda produtoVenda = ProdutoVenda.builder().idProduto(produto.getCodigoDeBarrasProduto()).venda(idVenda).quantidade(produto.getQuantidade()).build();
             produtoVendaRepositorio.save(produtoVenda);
+            estoqueService.retiraEstoque(produto.getCodigoDeBarrasProduto(),produto.getQuantidade());
         });
     }
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Dinheiro extends FormaPagamento {
     private int valorRecebido;
 
-    public float calcularTroco(float valorRecebido) {
-        return 0.0f;
+    public static float calcularTroco(float valorRecebido, float valorTotal) {
+        return valorRecebido-valorTotal;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import projetoSoftware.com.mercado.enumerado.cargoEnum;
 import projetoSoftware.com.mercado.modelo.Cliente;
 import projetoSoftware.com.mercado.modelo.Produto;
 import projetoSoftware.com.mercado.modelo.Usuario;
@@ -37,29 +38,35 @@ public class IniciaControlador {
         produtos.add(new Produto(1, "Nescau", new Float(10), "Guanabara"));
         produtos.add(new Produto(2, "Leite", new Float(4), "Guanabara"));
         produtos.add(new Produto(3, "Arroz", new Float(3), "Guanabara"));
-        produtos.add(new Produto(4, "feijão", new Float(2), "Guanabara"));
+        produtos.add(new Produto(4, "feijão", new Float(2), "Guanabara"));produtos.add(new Produto(1, "Nescau", new Float(10), "Guanabara"));
+        produtos.add(new Produto(2, "ovo", new Float(10), "Guanabara"));
+        produtos.add(new Produto(3, "farinha", new Float(3), "Guanabara"));
+        produtos.add(new Produto(4, "manteiga", new Float(2), "Guanabara"));
         for (Produto produto : produtos) {
-            produtoServico.createProdutoComQuantidade(produto, 40);
+            Produto recuperado = produtoServico.getProdutoById(produto.getCodigoDeBarras());
+            if (recuperado == null){
+                produtoServico.createProdutoComQuantidade(produto, 40);
+            }
         }
-        Usuario gerente = Usuario.builder().cargo("GERENTE").nome("Paulo Machado").usuario("gerente").senha("password").build();
+        Usuario gerente = Usuario.builder().cargo(cargoEnum.GERENTE).nome("Paulo Machado").usuario("gerente").senha("password").build();
         Usuario gerenteExiste = gerenteServico.autentica(gerente.getUsuario(), gerente.getSenha());
         if (gerenteExiste == null) {
             gerenteServico.criarGerente(gerente);
         }
-        Usuario vendedor = Usuario.builder().cargo("GERENTE").nome("Lucas Almeida").usuario("vendedor").senha("password").build();
+        Usuario vendedor = Usuario.builder().cargo(cargoEnum.VENDEDOR).nome("Lucas Almeida").usuario("vendedor").senha("password").build();
         Usuario vendedorExiste = vendedorServico.login(vendedor.getUsuario(), vendedor.getSenha());
         if (vendedorExiste == null) {
-            gerenteServico.criarGerente(gerente);
+            gerenteServico.criarGerente(vendedor);
         }
-        Cliente cliente = Cliente.builder().cpf("98765432100").email("cliente@email.com").identidade("112223331").ehPreferencial(true).pontosAcumulados(100).build();
-        Cliente cliente2 = Cliente.builder().cpf("98765432101").email("cliente2@email.com").identidade("112223331").ehPreferencial(false).pontosAcumulados(100).build();
+        Cliente cliente = Cliente.builder().cpf("98765432100").email("cliente@email.com").identidade("112223331").ehPreferencial(true).nome("Mauricio").pontosAcumulados(100).build();
+        Cliente cliente2 = Cliente.builder().cpf("98765432101").email("cliente2@email.com").identidade("112223331").ehPreferencial(false).nome("Henrique").pontosAcumulados(100).build();
 
         Cliente cliente1 = clienteServico.confirmarIdentificacao(cliente.getCpf());
         Cliente cliente21 = clienteServico.confirmarIdentificacao(cliente2.getCpf());
         if (cliente1 == null) {
             clienteServico.cadastrarCliente(cliente);
         }
-        if (cliente2 == null) {
+        if (cliente21 == null) {
             clienteServico.cadastrarCliente(cliente2);
         }
         return new ResponseEntity(HttpStatus.OK);

@@ -36,7 +36,4 @@ public class Venda {
     @Column(name = "data")
     private Date data;
 
-    @Column(name = "status")
-    private statusVenda status;
-
 }

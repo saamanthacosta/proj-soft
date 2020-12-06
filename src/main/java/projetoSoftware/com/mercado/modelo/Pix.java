@@ -11,7 +11,7 @@ public class Pix extends FormaPagamento {
     private int chave;
     private TipoDeChavePix tipoDaChave;
 
-    public boolean verificarChave(int chave) {
+    public static boolean verificarChave(String chave) {
         return false;
     }
 }
