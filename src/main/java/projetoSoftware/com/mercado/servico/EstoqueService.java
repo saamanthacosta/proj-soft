@@ -39,7 +39,7 @@ public class EstoqueService {
                 System.out.println("Não foi possível fazer a retirada do Estoque");
                 return null;
             }
-            System.out.println("EstoqueServico :: adicionarEstoque :: quantidade retirada do estoque " +
+            System.out.println("EstoqueServico :: adicionarEstoque ::"+qtdRetira+" unidades retiradas do produto " +
                     novo.getCodigoDeBarrasProduto());
             return novo;
         } catch (Exception e) {
