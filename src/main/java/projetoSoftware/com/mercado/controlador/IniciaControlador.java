@@ -38,10 +38,10 @@ public class IniciaControlador {
         produtos.add(new Produto(1, "Nescau", new Float(10), "Guanabara"));
         produtos.add(new Produto(2, "Leite", new Float(4), "Guanabara"));
         produtos.add(new Produto(3, "Arroz", new Float(3), "Guanabara"));
-        produtos.add(new Produto(4, "feijão", new Float(2), "Guanabara"));produtos.add(new Produto(1, "Nescau", new Float(10), "Guanabara"));
-        produtos.add(new Produto(2, "ovo", new Float(10), "Guanabara"));
-        produtos.add(new Produto(3, "farinha", new Float(3), "Guanabara"));
-        produtos.add(new Produto(4, "manteiga", new Float(2), "Guanabara"));
+        produtos.add(new Produto(4, "Feijão", new Float(2), "Guanabara"));
+        produtos.add(new Produto(5, "Ovo", new Float(10), "Guanabara"));
+        produtos.add(new Produto(6, "Farinha", new Float(3), "Guanabara"));
+        produtos.add(new Produto(7, "Manteiga", new Float(2), "Guanabara"));
         for (Produto produto : produtos) {
             Produto recuperado = produtoServico.getProdutoById(produto.getCodigoDeBarras());
             if (recuperado == null){
