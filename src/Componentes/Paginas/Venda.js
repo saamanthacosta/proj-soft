@@ -26,7 +26,7 @@ export default class Venda extends Component {
             venda: {
                 produtos: [],
                 valorTotal: 0,
-                cliente: ClienteStore.cliente.cpf,
+                cliente: ClienteStore.cliente,
                 vendedor: VendedorStore.vendedor.id
             },
             ultimoProduto: null

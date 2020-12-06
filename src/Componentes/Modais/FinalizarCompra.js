@@ -13,6 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { TextField } from '@material-ui/core';
 import Item from '../../Modelos/Item';
 import Venda from '../../Modelos/Venda';
+import Erro from '../Genericos/Erro';
 
 class FinalizarCompra extends Component {
 
@@ -23,21 +24,36 @@ class FinalizarCompra extends Component {
             venda: this.props.venda,
             pagamento: null,
             formaDePagamento: null,
-            valorTroco: null,
+            valorTroco: 0,
             pix: null,
-            cartao: null
+            cartao: null,
+            erro: {
+              visualizacao: false,
+              mensagem: null
+            }
         };
     }
 
     componentDidMount() {
         ModalStore.on('FINALIZAR_COMPRA', this.abrir);
         VendaStore.on('CHANGE', this.redirecionar);
+        VendaStore.on('ERRO', this.exibirErro);
     }
 
     componentWillUnmount() {
         ModalStore.removeListener('FINALIZAR_COMPRA', this.abrir);
         VendaStore.removeListener('CHANGE', this.redirecionar);
+        VendaStore.on('ERRO', this.exibirErro);
     }
+
+    
+  exibirErro = () => {
+    let erro = {
+      visualizacao: true,
+      mensagem: VendaStore.erro
+    }
+    this.setState({ erro })
+  }
 
 
     redirecionar = () => {
@@ -75,7 +91,7 @@ class FinalizarCompra extends Component {
     }
 
     voltar = () => {
-        this.setState({formaDePagamento: null})
+        this.setState({ formaDePagamento: null })
     }
 
     mudarPIX = (evento) => {
@@ -91,12 +107,25 @@ class FinalizarCompra extends Component {
     }
 
     finalizar = () => {
+        let produtos = this.converterProdutos();
+        
+        let pagamento = this.converterPagamento();
+
+        let venda = new Venda(this.state.venda.vendedor, this.state.venda.cliente.cpf, produtos, pagamento);
+
+        VendaActions.cadastrar(venda);
+    }
+
+    converterProdutos = () => {
         let produtos = [];
         this.state.venda.produtos.forEach(produto => {
             let item = new Item(produto.codigoDeBarras, parseInt(produto.quantidade));
             produtos.push(item);
         });
+        return produtos;
+    }
 
+    converterPagamento = () => {
         let pagamento = {
             tipo: this.state.formaDePagamento,
             numero: 0
@@ -114,14 +143,13 @@ class FinalizarCompra extends Component {
                 break;
         }
 
-        let venda = new Venda(this.state.venda.vendedor, this.state.venda.cliente, produtos, pagamento);
-
-        VendaActions.cadastrar(venda);
+        return pagamento;
     }
 
     render() {
 
         return <>
+        <Erro aberto={this.state.erro.visualizacao} mensagem={this.state.erro.mensagem} fecharErro={this.fecharErro} />
 
         {
             this.state.formaDePagamento === null && 

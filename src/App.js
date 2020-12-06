@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { ROTAS } from './Config/routes';
 import LoginGerente from './Componentes/Paginas/LoginGerente';
@@ -7,6 +7,7 @@ import Venda from './Componentes/Paginas/Venda';
 import DashboardGerente from './Componentes/Paginas/DashboardGerente';
 import GerenteStore from './Gerenciamento de Estados/Stores/GerenteStore';
 import VendedorStore from './Gerenciamento de Estados/Stores/VendedorStore';
+import ServicoDeInicializar from './Servicos/ServicoDeInicializar';
 
 const PrivateRouteGerente = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props =>
@@ -44,15 +45,26 @@ function vendedorAutenticado() {
     }
 }
 
-export default function App() {
-    return <>
-        <BrowserRouter>
-            <Switch >
-                <Route path={ROTAS.INICIAR_SISTEMA} exact component={LoginGerente} />
-                <PrivateRouteGerente path={ROTAS.DASHBOARD_GERENTE} exact component={DashboardGerente} />
-                <PrivateRouteGerente path={ROTAS.LOGIN_VENDEDOR} exact component={LoginVendedor} />
-                <PrivateRouteVendedor path={ROTAS.VENDA} exact component={Venda} />
-            </Switch>
-        </BrowserRouter>
-    </>;
+export default class App extends Component {
+
+    constructor(props) {
+        super(props);
+    };
+
+    componentDidMount() {
+        ServicoDeInicializar.inicializar();
+    }
+
+    render() {
+        return <>
+            <BrowserRouter>
+                <Switch >
+                    <Route path={ROTAS.INICIAR_SISTEMA} exact component={LoginGerente} />
+                    <PrivateRouteGerente path={ROTAS.DASHBOARD_GERENTE} exact component={DashboardGerente} />
+                    <PrivateRouteGerente path={ROTAS.LOGIN_VENDEDOR} exact component={LoginVendedor} />
+                    <PrivateRouteVendedor path={ROTAS.VENDA} exact component={Venda} />
+                </Switch>
+            </BrowserRouter>
+        </>;
+    }
 };

@@ -5,19 +5,16 @@ class VendaActions {
 
     cadastrar(venda) {
         ServicoDeVenda.cadastrar(venda).then(
-            resp => {
+            sucesso => {
                 Dispatcher.dispatch({
                     actionType: 'VENDA_CRIADA',
-                    value: resp.value
+                    value: sucesso.data
                 });
             },
             erro => {
                 Dispatcher.dispatch({
                     actionType: 'ERRO_VENDA',
-                    value:  {
-                        status:  'ERRO',
-                        mensagem: erro.response.data
-                    }
+                    value: erro.data
                 });
             }
         )

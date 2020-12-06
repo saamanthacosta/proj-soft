@@ -16,7 +16,7 @@ class VendedorStore extends EventEmitter {
 
     dispatcherCallBack(action) {
         switch (action.actionType) {
-            case 'LOGIN_VENDEDOR_ERRO':
+            case 'LOGIN_VENDEDOR':
                 this.vendedor = new Vendedor(action.value.identificador);
                 this.emit('LOGIN');
                 break;

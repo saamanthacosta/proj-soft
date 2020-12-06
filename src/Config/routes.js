@@ -22,6 +22,7 @@ export const ROTAS = {
         },
         venda: {
             cadastrar: 'venda/registrar'
-        }
+        },
+        inicializar: 'iniciar/padrao/'
     }
 };

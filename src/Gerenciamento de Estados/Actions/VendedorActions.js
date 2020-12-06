@@ -7,7 +7,7 @@ class VendedorActions {
         ServicoDeVendedor.autenticar(usuario).then(
             sucesso => {
                 Dispatcher.dispatch({
-                    actionType: 'LOGIN_VENDEDOR_ERRO',
+                    actionType: 'LOGIN_VENDEDOR',
                     value: sucesso.data
                 });
             },
