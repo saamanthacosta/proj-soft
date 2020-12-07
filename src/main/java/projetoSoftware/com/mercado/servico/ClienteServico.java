@@ -15,7 +15,7 @@ public class ClienteServico {
 
 //    ReclamacaoServico reclamacaoServico = new ReclamacaoServico();
 
-    public Cliente cadastrarCliente(Cliente cliente) {
+    public Cliente cadastrar(Cliente cliente) {
         try {
             cliente.setDataCadastro(new Date());
             Cliente novo = clienteRepositorio.save(cliente);

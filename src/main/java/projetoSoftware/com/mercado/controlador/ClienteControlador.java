@@ -14,13 +14,13 @@ public class ClienteControlador {
     @Autowired
     ClienteServico clienteServico;
     @PostMapping("/cadastro")
-    public ResponseEntity cadastrarCliente(@RequestBody Cliente cliente){
-        System.out.println("ClienteControlador :: cadastrarCliente :: Entrou cliente" + cliente.toString());
-        Cliente clienteGerado = clienteServico.cadastrarCliente(cliente);
+    public ResponseEntity cadastrar(@RequestBody Cliente cliente){
+        System.out.println("ClienteControlador :: cadastrar :: Entrou cliente" + cliente.toString());
+        Cliente clienteGerado = clienteServico.cadastrar(cliente);
         return new ResponseEntity<Cliente>(clienteGerado, HttpStatus.OK);
     }
     @GetMapping("/identificar")
-    public ResponseEntity identificarCliente(@RequestParam String cpf){
+    public ResponseEntity identificar(@RequestParam String cpf){
         Cliente cliente = clienteServico.confirmarIdentificacao(cpf);
         if (cliente != null){
         return new ResponseEntity<Cliente>(cliente,HttpStatus.OK);
@@ -45,7 +45,7 @@ public class ClienteControlador {
         }
     }
 
-    @PostMapping("/cliente/reclamacao")
+    @PostMapping("/reclamacao")
     public void reclamacaoCliente(@RequestBody String reclamacao, @RequestHeader String cpf) {
         System.out.println("ClienteControlador :: reclamacaoCliente :: Entrou cliente");
 //        clienteServico.registraReclamacao(cpf, reclamacao);

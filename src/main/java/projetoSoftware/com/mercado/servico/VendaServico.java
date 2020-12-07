@@ -48,7 +48,7 @@ public class VendaServico {
     private float calculaPagamento(ArrayList<Estoque> produtos) {
         final float[] precoTotal = {0};
         produtos.forEach(estoque -> {
-            Produto produto = produtoService.getProdutoById(estoque.getCodigoDeBarrasProduto());
+            Produto produto = produtoService.consultarPorIdentificador(estoque.getCodigoDeBarrasProduto());
             if(produto != null){
             float valorTotalProduto = produto.getPreco() * estoque.getQuantidade();
             precoTotal[0] = precoTotal[0] + valorTotalProduto;
@@ -63,7 +63,7 @@ public class VendaServico {
         produtos.forEach(produto -> {
             ProdutoVenda produtoVenda = ProdutoVenda.builder().idProduto(produto.getCodigoDeBarrasProduto()).venda(idVenda).quantidade(produto.getQuantidade()).build();
             produtoVendaRepositorio.save(produtoVenda);
-            estoqueService.retiraEstoque(produto.getCodigoDeBarrasProduto(),produto.getQuantidade());
+            estoqueService.retirar(produto.getCodigoDeBarrasProduto(),produto.getQuantidade());
         });
     }
 }

@@ -18,7 +18,7 @@ public class GerenteControlador {
     GerenteServico gerenteServico;
 
     @PostMapping("/iniciaSistema")
-    public ResponseEntity<?> iniciarSistema(@RequestBody Gerente gerente) {
+    public ResponseEntity<?> login(@RequestBody Gerente gerente) {
         System.out.println("GerenteControlador :: iniciarSistema :: Iniciando sistema ");
         Usuario gerenteAuth = gerenteServico.autentica(gerente.getUsuario(), gerente.getSenha());
         if (gerenteAuth != null) {

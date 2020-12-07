@@ -27,7 +27,7 @@ public class GerenteServico {
         }
     }
 
-    public Usuario criarGerente(Usuario gerente) {
+    public Usuario criar(Usuario gerente) {
         try {
             return usuarioRepositorio.save(gerente);
         } catch (Exception e) {

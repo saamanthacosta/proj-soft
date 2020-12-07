@@ -11,12 +11,12 @@ public class ReclamacaoServico {
     @Autowired
     ReclamacaoRepositorio reclamacaoRepositorio;
 
-    public void realizarReclamacao(String cpf, String reclamacao, Assunto assunto) {
+    public void realizar(String cpf, String reclamacao, Assunto assunto) {
         Reclamacao novo = new Reclamacao(cpf, reclamacao, assunto);
-        this.save(novo);
+        this.salvar(novo);
     }
 
-    public Reclamacao save(Reclamacao reclamacao) {
+    public Reclamacao salvar(Reclamacao reclamacao) {
         try {
             Reclamacao reclamacaoSalva = reclamacaoRepositorio.save(reclamacao);
             System.out.println("Reclamacao :: save :: reclamação salva");

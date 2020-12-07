@@ -15,22 +15,22 @@ public class EstoqueControlador {
     EstoqueService estoqueServico;
 
     @RequestMapping(path = "/consulta/{identificador}", method = RequestMethod.GET)
-    public ResponseEntity<?> getProdutoById(
+    public ResponseEntity<?> consultarPorIdentificador(
             @PathVariable int identificador
     ) {
-        Estoque estoque = estoqueServico.getByProdutoId(identificador);
+        Estoque estoque = estoqueServico.consultarPeloIdentificador(identificador);
         return new ResponseEntity<>(estoque, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/adcEstoque")
-    public ResponseEntity<?> adcEstoque(@RequestParam int codigoDeBarrasProduto, @RequestParam int qtdAdc) {
-        Estoque produtoAdicionado = estoqueServico.adcEstoque(codigoDeBarrasProduto, qtdAdc);
+    @PostMapping(path = "/adicionar")
+    public ResponseEntity<?> adicionar(@RequestParam int codigoDeBarrasProduto, @RequestParam int quantidade) {
+        Estoque produtoAdicionado = estoqueServico.adicionar(codigoDeBarrasProduto, quantidade);
         return new ResponseEntity<>("{\"Mensagem\": \"Estoque add.\"}", HttpStatus.OK);
     }
 
-    @PostMapping(path = "/retiraEstoque")
-    public ResponseEntity<?> retiraEstoque(@RequestParam int codigoDeBarrasProduto, @RequestParam int qtdRetira) {
-        Estoque produtoRetirado = estoqueServico.retiraEstoque(codigoDeBarrasProduto, qtdRetira);
+    @PostMapping(path = "/retirar")
+    public ResponseEntity<?> retirar(@RequestParam int codigoDeBarrasProduto, @RequestParam int quantidade) {
+        Estoque produtoRetirado = estoqueServico.retirar(codigoDeBarrasProduto, quantidade);
         return new ResponseEntity<>("{\"Mensagem\": \"Estoque retira.\"}", HttpStatus.OK);
     }
 }

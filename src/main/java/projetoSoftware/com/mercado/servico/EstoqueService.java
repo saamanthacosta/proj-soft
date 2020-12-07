@@ -11,14 +11,14 @@ public class EstoqueService {
     @Autowired
     EstoqueRepositorio estoqueRepositorio;
 
-    public Estoque getByProdutoId(int id) {
+    public Estoque consultarPeloIdentificador(int id) {
         return estoqueRepositorio.findByCodigoDeBarrasProduto(id);
     }
 
-    public Estoque adcEstoque(int codigoDeBarrasProduto, int qtdAdc) {
+    public Estoque adicionar(int codigoDeBarrasProduto, int quantidade) {
         try {
             Estoque estoque = this.confirmarCodBarras(codigoDeBarrasProduto);
-            estoque.adicionar(qtdAdc);
+            estoque.adicionar(quantidade);
 
             Estoque novo = estoqueRepositorio.save(estoque);
             System.out.println("EstoqueServico :: adicionarEstoque :: quantidade adicionada no estoque " +
@@ -30,10 +30,10 @@ public class EstoqueService {
         }
     }
 
-    public Estoque retiraEstoque(int codigoDeBarrasProduto, int qtdRetira) {
+    public Estoque retirar(int codigoDeBarrasProduto, int quantidade) {
         try {
             Estoque estoque = this.confirmarCodBarras(codigoDeBarrasProduto);
-            estoque.retirar(qtdRetira);
+            estoque.retirar(quantidade);
             Estoque novo = estoqueRepositorio.save(estoque);
             if (novo == null) {
                 System.out.println("Não foi possível fazer a retirada do Estoque");

@@ -16,43 +16,43 @@ public class ProdutoControlador {
     ProdutoService produtoService;
 
     @RequestMapping(path = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> listProdutos() {
-        List<Produto> produtos = produtoService.listProdutos();
+    public ResponseEntity<?> listar() {
+        List<Produto> produtos = produtoService.listar();
         return new ResponseEntity<>(produtos, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/get_one/{identificador}", method = RequestMethod.GET)
-    public ResponseEntity<?> getProdutoById(
+    public ResponseEntity<?> consultarPorIdentificador(
             @PathVariable int identificador
     ) {
-        Produto produto = produtoService.getProdutoById(identificador);
+        Produto produto = produtoService.consultarPorIdentificador(identificador);
         return new ResponseEntity<>(produto, HttpStatus.OK);
     }
 
     @PostMapping(path = "/create")
-    public ResponseEntity<?> createProduto(
+    public ResponseEntity<?> criar(
             @RequestBody Produto newProduto
     ) {
-        produtoService.createProduto(newProduto);
+        produtoService.criar(newProduto);
         return new ResponseEntity<>("{\"Mensagem\": \"Criado.\"}", HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/update/{identificador}")
-    public ResponseEntity<?> updateProduto(
+    @PostMapping(path = "/atualizar/{identificador}")
+    public ResponseEntity<?> atualizar(
             @RequestBody Produto produto, @PathVariable Integer identificador
     ) {
-        Produto produtoBuscado = produtoService.getProdutoById(identificador);
+        Produto produtoBuscado = produtoService.consultarPorIdentificador(identificador);
         produtoBuscado.atualizar(produto);
-        produtoService.createProduto(produtoBuscado);
+        produtoService.criar(produtoBuscado);
         return new ResponseEntity<>("{\"Mensagem\": \"Atualizado.\"}", HttpStatus.OK);
     }
 
-    @PostMapping(path = "/delete/{identificador}")
-    public ResponseEntity<?> deleteProduto(
+    @PostMapping(path = "/remover/{identificador}")
+    public ResponseEntity<?> remover(
             @RequestBody Produto produto, @PathVariable Integer identificador
     ) {
-        Produto produtoBuscado = produtoService.getProdutoById(identificador);
-        produtoService.deleteProduto(produtoBuscado);
+        Produto produtoBuscado = produtoService.consultarPorIdentificador(identificador);
+        produtoService.remover(produtoBuscado);
         return new ResponseEntity<>("{\"Mensagem\": \"Deletado.\"}", HttpStatus.OK);
     }
 

@@ -16,11 +16,11 @@ public class ProdutoService {
     @Autowired
     EstoqueService estoqueService;
 
-    public List<Produto> listProdutos() {
+    public List<Produto> listar() {
         return produtoRepositorio.findAll();
     }
 
-    public Produto getProdutoById(int codigoDeBarras) {
+    public Produto consultarPorIdentificador(int codigoDeBarras) {
         try{
             return produtoRepositorio.findByCodigoDeBarras(codigoDeBarras);
         }catch (Exception err){
@@ -28,16 +28,16 @@ public class ProdutoService {
         }
     }
 
-    public void createProduto(Produto produto) {
+    public void criar(Produto produto) {
         produtoRepositorio.save(produto);
     }
 
-    public void createProdutoComQuantidade(Produto produto, int quantidade) {
+    public void criarComQuantidade(Produto produto, int quantidade) {
         Produto produtoSalvo = produtoRepositorio.save(produto);
-        estoqueService.adcEstoque(produtoSalvo.getCodigoDeBarras(), quantidade);
+        estoqueService.adicionar(produtoSalvo.getCodigoDeBarras(), quantidade);
     }
 
-    public void deleteProduto(Produto produto) {
+    public void remover(Produto produto) {
         produtoRepositorio.delete(produto);
     }
 
