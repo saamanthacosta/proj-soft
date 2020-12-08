@@ -12,11 +12,11 @@ Instala todas as dependências no projeto
 
 ### `npm start`
 
-Roda a aplicação locamente e abre a abre automaticamente na porta 3000
+Roda a aplicação locamente e a abre automaticamente na porta 3000
 
 ## Dados para serem manipulados na interface
 
-Foram tratados situações de sucesso e erro na interface
+Foram tratados situações de sucesso e erro, exibindo uma mensagem caso algo inesperado ocorra
 
 ### Tela inicial (Gerente):
 Usuario: gerente
